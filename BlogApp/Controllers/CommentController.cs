@@ -20,6 +20,27 @@ namespace BlogApp.Controllers
             return View(comments);
         }
 
+
+        // POST: /Comment/Create  -- visitor submits a comment from Post/Details
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.IsApproved = false;
+                _db.Comments.Add(comment);
+                await _db.SaveChangesAsync();
+                TempData["CommentSuccess"] = "Your comment was submitted and is awaiting approval.";
+            }
+            else
+            {
+                var errors = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                TempData["CommentError"] = errors;
+            }
+            return RedirectToAction("Details", "Post", new { id = comment.PostId });
+        }
+
         // POST: /Comment/Approve/5
         [HttpPost]
         [ValidateAntiForgeryToken]

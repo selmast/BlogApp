@@ -1,0 +1,68 @@
+﻿@model BlogApp.Models.Post
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<article>
+    <h1>@Model.Title</h1>
+
+    @if (TempData["CommentSuccess"] != null)
+    {
+        <div class="alert alert-success">@TempData["CommentSuccess"]</div>
+    }
+    @if (TempData["CommentError"] != null)
+    {
+        <div class="alert alert-danger">@TempData["CommentError"]</div>
+    }
+
+    <p><em>Category: @Model.Category?.Name | Published: @Model.PublishDate.ToShortDateString()</em></p>
+
+    @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
+    {
+        <img src="@Model.CoverImageUrl" alt="@Model.Title" style="max-width:100%;" />
+    }
+
+    <p>@Model.Content</p>
+</article>
+
+<hr />
+
+<h3>Comments</h3>
+
+@{
+    var approvedComments = Model.Comments?.Where(c => c.IsApproved).ToList();
+}
+
+@if (approvedComments != null && approvedComments.Any())
+{
+    foreach (var comment in approvedComments)
+    {
+        <div class="comment">
+            <strong>@comment.Author</strong> <small>@comment.CommentDate.ToShortDateString()</small>
+            <p>@comment.Content</p>
+        </div>
+    }
+}
+else
+{
+    <p>No comments yet. Be the first to comment!</p>
+}
+
+<h4>Leave a Comment</h4>
+
+<form asp-controller="Comment" asp-action="Create" method="post">
+    <input type="hidden" name="PostId" value="@Model.Id" />
+
+    <div class="form-group">
+        <label>Name</label>
+        <input name="Author" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label>Comment</label>
+        <textarea name="Content" class="form-control" rows="3" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Comment</button>
+</form>

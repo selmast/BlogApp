@@ -20,6 +20,18 @@ namespace BlogApp.Controllers
             return View(posts);
         }
 
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var post = await _db.Posts
+                .Include(p => p.Category)
+                .Include(p => p.Comments)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (post == null) return NotFound();
+            return View(post);
+        }
+
         public IActionResult Create()
         {
             ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
