@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BlogApp.Models.Comment>
+
+@{
+    ViewData["Title"] = "Comments";
+}
+
+<h1>Comments</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Post</th>
+            <th>Date</th>
+            <th>Approved</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Author</td>
+                <td>@item.Content</td>
+                <td>@item.Post?.Title</td>
+                <td>@item.CommentDate.ToShortDateString()</td>
+                <td>@(item.IsApproved ? "Yes" : "No")</td>
+                <td>
+                    @if (!item.IsApproved)
+                    {
+                        <form asp-action="Approve" asp-route-id="@item.Id" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                        </form>
+                    }
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

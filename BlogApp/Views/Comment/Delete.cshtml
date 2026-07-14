@@ -1,0 +1,17 @@
+﻿@model BlogApp.Models.Comment
+
+@{
+    ViewData["Title"] = "Delete Comment";
+}
+
+<h1>Delete Comment</h1>
+
+<p>Delete comment by "@Model.Author" on post "@Model.Post?.Title"?</p>
+<blockquote>@Model.Content</blockquote>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
+<a asp-action="Index">Cancel</a>
