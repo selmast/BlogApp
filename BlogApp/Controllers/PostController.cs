@@ -31,6 +31,11 @@ namespace BlogApp.Controllers
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (post == null) return NotFound();
+
+            post.ViewCount++;
+            await _db.SaveChangesAsync();
+
+
             return View(post);
         }
 

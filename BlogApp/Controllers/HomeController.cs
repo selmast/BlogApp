@@ -1,14 +1,42 @@
 using BlogApp.Models;
+using BlogApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly BlogDbContext _db;
+
+        public HomeController(BlogDbContext db)
         {
-            return View();
+            _db = db;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var model = new HomeViewModel
+            {
+                RecentPosts = await _db.Posts
+                    .Include(p => p.Category)
+                    .Where(p => p.IsActive)
+                    .OrderByDescending(p => p.PublishDate)
+                    .Take(5)
+                    .ToListAsync(),
+
+                MostReadPosts = await _db.Posts
+                    .Include(p => p.Category)
+                    .Where(p => p.IsActive)
+                    .OrderByDescending(p => p.ViewCount)
+                    .Take(5)
+                    .ToListAsync(),
+
+                Categories = await _db.Categories.ToListAsync()
+            };
+
+            return View(model);
         }
 
         public IActionResult Privacy()
