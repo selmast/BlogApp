@@ -62,7 +62,7 @@ namespace BlogApp.Controllers
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("Index", "Post");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         [HttpPost]

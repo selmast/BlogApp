@@ -1,0 +1,64 @@
+﻿@model BlogApp.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Total Posts</h5>
+                <p class="display-4">@Model.TotalPosts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Total Categories</h5>
+                <p class="display-4">@Model.TotalCategories</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Total Comments</h5>
+                <p class="display-4">@Model.TotalComments</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Recently Added Posts</h3>
+
+@if (Model.RecentPosts != null && Model.RecentPosts.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Publish Date</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model.RecentPosts)
+            {
+                <tr>
+                    <td><a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">@post.Title</a></td>
+                    <td>@post.Category?.Name</td>
+                    <td>@post.PublishDate.ToShortDateString()</td>
+                    <td>@(post.IsActive ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No posts yet.</p>
+}
