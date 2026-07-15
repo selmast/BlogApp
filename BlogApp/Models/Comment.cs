@@ -12,6 +12,11 @@ namespace BlogApp.Models
         public string Author { get; set; }
 
         [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+
+        [Required]
         public string Content { get; set; }
 
         public DateTime CommentDate { get; set; } = DateTime.Now;

@@ -21,6 +21,8 @@ namespace BlogApp.Models
 
         public DateTime PublishDate { get; set; } = DateTime.Now;
 
+        public int ViewCount { get; set; } = 0;
+
         public bool IsActive { get; set; } = true;
 
         [ForeignKey("Category")]
