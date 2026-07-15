@@ -39,6 +39,20 @@ namespace BlogApp.Controllers
             return View(post);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Search(string term)
+        {
+            var posts = await _db.Posts
+                .Include(p => p.Category)
+                .Where(p => p.IsActive && (p.Title.Contains(term) || p.Content.Contains(term)))
+                .OrderByDescending(p => p.PublishDate)
+                .ToListAsync();
+
+            ViewBag.SearchTerm = term;
+            return View(posts);
+        }
+
+
         public IActionResult Create()
         {
             ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
