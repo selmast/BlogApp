@@ -10,6 +10,8 @@
 }
 
 <form asp-controller="Account" asp-action="Login" method="post">
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
     <div class="form-group">
         <label>Username</label>
         <input name="username" class="form-control" required />

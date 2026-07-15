@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlogApp.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BlogApp.Models;
 
 namespace BlogApp.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private readonly BlogDbContext _db;
@@ -20,7 +22,7 @@ namespace BlogApp.Controllers
             return View(posts);
         }
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var post = await _db.Posts

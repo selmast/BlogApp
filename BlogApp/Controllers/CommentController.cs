@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlogApp.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BlogApp.Models;
 
 namespace BlogApp.Controllers
 {
+    [Authorize]
     public class CommentController : Controller
     {
         private readonly BlogDbContext _db;
@@ -23,7 +25,9 @@ namespace BlogApp.Controllers
 
         // POST: /Comment/Create  -- visitor submits a comment from Post/Details
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create(Comment comment)
         {
             if (ModelState.IsValid)

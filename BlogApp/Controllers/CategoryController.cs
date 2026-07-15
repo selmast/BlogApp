@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BlogApp.Models;
+﻿using BlogApp.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly BlogDbContext _db;
