@@ -3,28 +3,45 @@
     ViewData["Title"] = "Search Results";
 }
 
-<h2>Search Results for "@ViewBag.SearchTerm"</h2>
-
-@if (Model != null && Model.Any())
-{
-    foreach (var post in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
-                </h5>
-                <p class="card-text text-muted">
-                    <small>@post.Category?.Name | @post.PublishDate.ToShortDateString()</small>
-                </p>
-                <p class="card-text">@post.Summary</p>
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <form asp-controller="Post" asp-action="Search" method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="term" class="form-control" placeholder="Search posts..." required />
+                <button type="submit" class="btn btn-primary">Search</button>
             </div>
-        </div>
-    }
-}
-else
-{
-    <p>No posts found matching "@ViewBag.SearchTerm".</p>
-}
+        </form>
 
-<a asp-controller="Home" asp-action="Index">Back to Home</a>
+        <h2>Search Results for "@ViewBag.SearchTerm"</h2>
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var post in Model)
+            {
+                <div class="card mb-3">
+                    @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                    {
+                        <a asp-action="Details" asp-route-id="@post.Id">
+                            <img src="@post.CoverImageUrl" class="card-img-top" alt="@post.Title" style="max-height:250px; object-fit:cover;" />
+                        </a>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+                        </h5>
+                        <p class="card-text text-muted">
+                            <small>@post.Category?.Name | @post.PublishDate.ToShortDateString()</small>
+                        </p>
+                        <p class="card-text">@post.Summary</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No posts found matching "@ViewBag.SearchTerm".</p>
+        }
+
+        <a asp-controller="Home" asp-action="Index">Back to Home</a>
+    </div>
+</div>

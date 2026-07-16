@@ -1,31 +1,70 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+:root {
+    --accent: #6B5B4A;
+    --accent-dark: #4A3E32;
+    --accent-light: #EFEAE0;
+    --page-bg: #F1EFE8;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--page-bg);
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.navbar {
+    background-color: var(--page-bg) !important;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+    .btn-primary:hover {
+        background-color: var(--accent-dark);
+        border-color: var(--accent-dark);
+    }
+
+.btn-outline-secondary {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+    .btn-outline-secondary:hover {
+        background-color: var(--accent);
+        border-color: var(--accent);
+    }
+
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(68, 68, 65, 0.08);
+}
+
+.badge.bg-secondary {
+    background-color: var(--accent-light) !important;
+    color: var(--accent) !important;
+    border-radius: 999px;
+}
+
+.list-group-item {
+    border: none;
+    border-radius: 10px !important;
+    margin-bottom: 8px;
+}
+
+    .list-group-item a {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+a {
+    color: var(--accent);
+}
+
+    a:hover {
+        color: var(--accent-dark);
+    }
+
+.footer {
+    padding: 1rem 0;
 }
