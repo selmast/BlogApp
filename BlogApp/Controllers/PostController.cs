@@ -91,6 +91,18 @@ namespace BlogApp.Controllers
             return View(posts);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> All()
+        {
+            var posts = await _db.Posts
+                .Include(p => p.Category)
+                .Where(p => p.IsActive)
+                .OrderByDescending(p => p.PublishDate)
+                .ToListAsync();
+
+            return View(posts);
+        }
+
 
         public IActionResult Create()
         {

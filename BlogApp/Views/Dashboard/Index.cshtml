@@ -14,28 +14,34 @@
 
 <div class="row mb-4">
     <div class="col-md-4">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Total Posts</h5>
-                <p class="display-4">@Model.TotalPosts</p>
+        <a asp-controller="Post" asp-action="Index" class="text-decoration-none text-dark">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Posts</h5>
+                    <p class="display-4">@Model.TotalPosts</p>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-md-4">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Total Categories</h5>
-                <p class="display-4">@Model.TotalCategories</p>
+        <a asp-controller="Category" asp-action="Index" class="text-decoration-none text-dark">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Categories</h5>
+                    <p class="display-4">@Model.TotalCategories</p>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-md-4">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Total Comments</h5>
-                <p class="display-4">@Model.TotalComments</p>
+        <a asp-controller="Comment" asp-action="Index" class="text-decoration-none text-dark">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total Comments</h5>
+                    <p class="display-4">@Model.TotalComments</p>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 
@@ -64,6 +70,8 @@
             }
         </tbody>
     </table>
+
+    <a asp-controller="Post" asp-action="Index" class="btn btn-outline-secondary btn-sm">View All Posts</a>
 }
 else
 {

@@ -23,14 +23,14 @@ namespace BlogApp.Controllers
                     .Include(p => p.Category)
                     .Where(p => p.IsActive)
                     .OrderByDescending(p => p.PublishDate)
-                    .Take(5)
+                    .Take(3)
                     .ToListAsync(),
 
                 MostReadPosts = await _db.Posts
                     .Include(p => p.Category)
                     .Where(p => p.IsActive)
                     .OrderByDescending(p => p.ViewCount)
-                    .Take(5)
+                    .Take(3)
                     .ToListAsync(),
 
                 Categories = await _db.Categories.ToListAsync()
