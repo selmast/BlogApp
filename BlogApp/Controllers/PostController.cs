@@ -16,6 +16,11 @@ namespace BlogApp.Controllers
             _db = db;
         }
 
+        private void PopulateCategoryDropdown()
+        {
+            ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
+        }
+
         public async Task<IActionResult> Index()
         {
             var posts = await _db.Posts.Include(p => p.Category).ToListAsync();
@@ -52,10 +57,26 @@ namespace BlogApp.Controllers
             return View(posts);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Category(int id)
+        {
+            var category = await _db.Categories.FindAsync(id);
+            if (category == null) return NotFound();
+
+            var posts = await _db.Posts
+                .Include(p => p.Category)
+                .Where(p => p.IsActive && p.CategoryId == id)
+                .OrderByDescending(p => p.PublishDate)
+                .ToListAsync();
+
+            ViewBag.CategoryName = category.Name;
+            return View(posts);
+        }
+
 
         public IActionResult Create()
         {
-            ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
+            PopulateCategoryDropdown();
             return View();
         }
 
@@ -69,7 +90,7 @@ namespace BlogApp.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
+            PopulateCategoryDropdown();
             return View(post);
         }
 
@@ -77,7 +98,7 @@ namespace BlogApp.Controllers
         {
             var post = await _db.Posts.FindAsync(id);
             if (post == null) return NotFound();
-            ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
+            PopulateCategoryDropdown();
             return View(post);
         }
 
@@ -91,7 +112,7 @@ namespace BlogApp.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
+            PopulateCategoryDropdown();
             return View(post);
         }
 

@@ -1,0 +1,30 @@
+﻿@model List<BlogApp.Models.Post>
+@{
+    ViewData["Title"] = ViewBag.CategoryName;
+}
+
+<h2>Category: @ViewBag.CategoryName</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var post in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+                </h5>
+                <p class="card-text text-muted">
+                    <small>@post.PublishDate.ToShortDateString()</small>
+                </p>
+                <p class="card-text">@post.Summary</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No posts in this category yet.</p>
+}
+
+<a asp-controller="Home" asp-action="Index">Back to Home</a>
