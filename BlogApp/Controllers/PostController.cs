@@ -10,15 +10,33 @@ namespace BlogApp.Controllers
     public class PostController : Controller
     {
         private readonly BlogDbContext _db;
+        private readonly IWebHostEnvironment _env;
 
-        public PostController(BlogDbContext db)
+        public PostController(BlogDbContext db, IWebHostEnvironment env)
         {
             _db = db;
+            _env = env;
         }
 
         private void PopulateCategoryDropdown()
         {
             ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");
+        }
+
+        private string SaveImage(IFormFile image)
+        {
+            var folder = Path.Combine(_env.WebRootPath, "images", "posts");
+            Directory.CreateDirectory(folder); // creates it if it doesn't exist yet
+
+            var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
+            var filePath = Path.Combine(folder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                image.CopyTo(stream);
+            }
+
+            return "/images/posts/" + fileName;
         }
 
         public async Task<IActionResult> Index()
@@ -82,10 +100,15 @@ namespace BlogApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Post post)
+        public async Task<IActionResult> Create(Post post, IFormFile? CoverImage)
         {
             if (ModelState.IsValid)
             {
+                if (CoverImage != null && CoverImage.Length > 0)
+                {
+                    post.CoverImageUrl = SaveImage(CoverImage);
+                }
+
                 _db.Posts.Add(post);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -104,16 +127,31 @@ namespace BlogApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Post post)
+        public async Task<IActionResult> Edit(Post post, IFormFile? CoverImage)
         {
-            if (ModelState.IsValid)
+            var existingPost = await _db.Posts.FindAsync(post.Id);
+            if (existingPost == null) return NotFound();
+
+            if (!ModelState.IsValid)
             {
-                _db.Posts.Update(post);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                PopulateCategoryDropdown();
+                return View(post);
             }
-            PopulateCategoryDropdown();
-            return View(post);
+
+            existingPost.Title = post.Title;
+            existingPost.Summary = post.Summary;
+            existingPost.Content = post.Content;
+            existingPost.CategoryId = post.CategoryId;
+            existingPost.IsActive = post.IsActive;
+
+            if (CoverImage != null && CoverImage.Length > 0)
+            {
+                existingPost.CoverImageUrl = SaveImage(CoverImage);
+            }
+            // else: existingPost.CoverImageUrl stays exactly as it was
+
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int id)

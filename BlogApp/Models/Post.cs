@@ -17,6 +17,7 @@ namespace BlogApp.Models
 
         public string Summary { get; set; }
 
+        [ValidateNever]
         public string CoverImageUrl { get; set; }
 
         public DateTime PublishDate { get; set; } = DateTime.Now;

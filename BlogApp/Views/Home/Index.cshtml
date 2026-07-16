@@ -21,7 +21,9 @@
                 <div class="card mb-3">
                     @if (!string.IsNullOrEmpty(post.CoverImageUrl))
                     {
-                        <img src="@post.CoverImageUrl" class="card-img-top" alt="@post.Title" style="max-height:250px; object-fit:cover;" />
+                        <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                            <img src="@post.CoverImageUrl" class="card-img-top" alt="@post.Title" style="max-height:250px; object-fit:cover;" />
+                        </a>
                     }
                     <div class="card-body">
                         <h5 class="card-title">
@@ -39,21 +41,6 @@
         {
             <p>No posts yet.</p>
         }
-
-        <h2 class="mt-4">Most Read</h2>
-
-        @if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
-        {
-            <ul class="list-group mb-4">
-                @foreach (var post in Model.MostReadPosts)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
-                        <span class="badge bg-secondary">@post.ViewCount views</span>
-                    </li>
-                }
-            </ul>
-        }
     </div>
 
     <div class="col-md-4">
@@ -61,11 +48,26 @@
 
         @if (Model.Categories != null && Model.Categories.Any())
         {
-            <ul class="list-group">
+            <ul class="list-group mb-4">
                 @foreach (var category in Model.Categories)
                 {
                     <li class="list-group-item">
                         <a asp-controller="Post" asp-action="Category" asp-route-id="@category.Id">@category.Name</a>
+                    </li>
+                }
+            </ul>
+        }
+
+        <h2>Most Read</h2>
+
+        @if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
+        {
+            <ul class="list-group">
+                @foreach (var post in Model.MostReadPosts)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+                        <span class="badge bg-secondary">@post.ViewCount views</span>
                     </li>
                 }
             </ul>
