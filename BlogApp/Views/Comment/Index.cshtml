@@ -11,37 +11,39 @@
 
 @if (pending.Any())
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="width:10%">Author</th>
-                <th style="width:30%">Content</th>
-                <th style="width:25%">Post</th>
-                <th style="width:15%">Date</th>
-                <th style="width:20%">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in pending)
-            {
-                <tr class="table-warning">
-                    <td>@item.Author</td>
-                    <td>@item.Content</td>
-                    <td>@item.Post?.Title</td>
-                    <td>@item.CommentDate.ToShortDateString()</td>
-                    <td>
-                        <div class="d-flex align-items-center gap-1">
-                            <form asp-action="Approve" asp-route-id="@item.Id" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-link p-0 align-baseline">Approve</button>
-                            </form>
-                            <span>|</span>
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
-                    </td>
+    <div class="card mb-3" style="overflow: hidden;">
+        <table class="table table-stack mb-0">
+            <thead>
+                <tr>
+                    <th style="width:10%">Author</th>
+                    <th style="width:30%">Content</th>
+                    <th style="width:25%">Post</th>
+                    <th style="width:15%">Date</th>
+                    <th style="width:20%">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in pending)
+                {
+                    <tr class="table-warning">
+                        <td data-label="Author">@item.Author</td>
+                        <td data-label="Content">@item.Content</td>
+                        <td data-label="Post">@item.Post?.Title</td>
+                        <td data-label="Date">@item.CommentDate.ToShortDateString()</td>
+                        <td data-label="Actions">
+                            <div class="d-flex align-items-center justify-content-end gap-1">
+                                <form asp-action="Approve" asp-route-id="@item.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-link p-0 align-baseline">Approve</button>
+                                </form>
+                                <span>|</span>
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
@@ -52,33 +54,35 @@ else
 
 @if (approved.Any())
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="width:10%">Author</th>
-                <th style="width:30%">Content</th>
-                <th style="width:25%">Post</th>
-                <th style="width:15%">Date</th>
-                <th style="width:20%">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in approved)
-            {
+    <div class="card mb-3" style="overflow: hidden;">
+        <table class="table table-stack mb-0">
+            <thead>
                 <tr>
-                    <td>@item.Author</td>
-                    <td>@item.Content</td>
-                    <td>@item.Post?.Title</td>
-                    <td>@item.CommentDate.ToShortDateString()</td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
-                    </td>
+                    <th style="width:10%">Author</th>
+                    <th style="width:30%">Content</th>
+                    <th style="width:25%">Post</th>
+                    <th style="width:15%">Date</th>
+                    <th style="width:20%">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in approved)
+                {
+                    <tr>
+                        <td data-label="Author">@item.Author</td>
+                        <td data-label="Content">@item.Content</td>
+                        <td data-label="Post">@item.Post?.Title</td>
+                        <td data-label="Date">@item.CommentDate.ToShortDateString()</td>
+                        <td data-label="Actions">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {

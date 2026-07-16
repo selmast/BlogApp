@@ -68,3 +68,68 @@ a {
 .footer {
     padding: 1rem 0;
 }
+
+.input-group .btn {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link,
+.dropdown-toggle {
+    color: var(--accent) !important;
+}
+
+    .nav-link:hover,
+    .dropdown-toggle:hover {
+        color: var(--accent-dark) !important;
+    }
+
+
+@media (max-width: 767.98px) {
+    .table-stack thead {
+        display: none;
+    }
+
+    .table-stack, .table-stack tbody, .table-stack tr, .table-stack td {
+        display: block;
+        width: 100%;
+    }
+
+        .table-stack tr {
+            margin-bottom: 1rem;
+            background-color: white;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(68, 68, 65, 0.12);
+            padding: 0.5rem 0;
+        }
+
+        .table-stack td {
+            text-align: right;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-bottom: 1px solid var(--accent-light);
+        }
+
+            .table-stack td:last-child {
+                border-bottom: none;
+            }
+
+            .table-stack td::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: 600;
+                color: var(--accent);
+            }
+
+    .card:has(.table-stack) {
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    .card {
+        margin-bottom: 1.25rem !important;
+        box-shadow: 0 4px 14px rgba(68, 68, 65, 0.16) !important;
+    }
+}
