@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BlogApp Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BlogApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    }
+    <div class="d-flex" style="min-height: 100vh;">
+        <nav class="admin-sidebar">
+            <div class="admin-sidebar-brand">BlogApp</div>
+
+            <a asp-controller="Home" asp-action="Index" class="admin-sidebar-link admin-sidebar-back">
+                &larr; Home
+            </a>
+
+            <div class="admin-sidebar-nav">
+                <a asp-controller="Dashboard" asp-action="Index" class="admin-sidebar-link @(currentController == "Dashboard" ? "active" : "")">Dashboard</a>
+                <a asp-controller="Post" asp-action="Index" class="admin-sidebar-link @(currentController == "Post" ? "active" : "")">Posts</a>
+                <a asp-controller="Category" asp-action="Index" class="admin-sidebar-link @(currentController == "Category" ? "active" : "")">Categories</a>
+                <a asp-controller="Comment" asp-action="Index" class="admin-sidebar-link @(currentController == "Comment" ? "active" : "")">Comments</a>
+                <a asp-controller="User" asp-action="Index" class="admin-sidebar-link @(currentController == "User" ? "active" : "")">Users</a>
+            </div>
+        </nav>
+
+        <div class="flex-grow-1">
+            <div class="admin-topbar">
+                <span class="admin-topbar-title">@ViewData["Title"]</span>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="admin-topbar-name">@User.Identity.Name</span>
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <div class="container-fluid p-4">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

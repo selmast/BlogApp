@@ -133,3 +133,109 @@ a {
         box-shadow: 0 4px 14px rgba(68, 68, 65, 0.16) !important;
     }
 }
+
+
+.admin-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background-color: var(--page-bg);
+    border-right: 1px solid var(--accent-light);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.admin-sidebar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--accent-dark);
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--accent-light);
+}
+
+.admin-sidebar-back {
+    font-size: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--accent-light);
+    color: var(--accent);
+}
+
+.admin-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+}
+
+.admin-sidebar-link {
+    display: block;
+    padding: 10px 20px;
+    color: var(--accent-dark);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+    .admin-sidebar-link:hover {
+        background-color: var(--accent-light);
+        color: var(--accent-dark);
+    }
+
+    .admin-sidebar-link.active {
+        background-color: var(--accent);
+        color: white;
+    }
+
+.admin-topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--accent-light);
+    background-color: white;
+}
+
+.admin-topbar-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: var(--accent-dark);
+}
+
+.admin-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--accent-light);
+    background-color: white;
+}
+
+.admin-topbar-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--accent-dark);
+}
+
+.admin-content {
+    background-color: white;
+    min-height: calc(100vh - 60px);
+}
+
+    .admin-content .card {
+        background-color: var(--page-bg);
+        box-shadow: none;
+    }
+
+.form-control:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.25rem var(--accent-light);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: var(--accent-dark);
+    transition: background-color 5000s ease-in-out 0s;
+}

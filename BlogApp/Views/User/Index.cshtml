@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<BlogApp.Models.User>
 @{
     ViewData["Title"] = "Users";
+    Layout = "_AdminLayout";
 }
 
-<h1>Users</h1>
+
 
 @if (TempData["DeleteError"] != null)
 {

@@ -1,12 +1,13 @@
 ﻿@model BlogApp.Models.Category
 @{
     ViewData["Title"] = "Create Category";
+    Layout = "_AdminLayout";
 }
 
 <div class="d-flex justify-content-center" style="margin-top: 2rem;">
     <div class="card" style="max-width: 500px; width: 100%;">
         <div class="card-body p-4">
-            <h1 class="mb-4">Create Category</h1>
+            
 
             <form asp-action="Create">
                 <div class="form-group mb-3">

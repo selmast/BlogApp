@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<BlogApp.Models.Comment>
 @{
     ViewData["Title"] = "Comments";
+    Layout = "_AdminLayout";
     var pending = Model.Where(c => !c.IsApproved).ToList();
     var approved = Model.Where(c => c.IsApproved).ToList();
 }
 
-<h1>Comments</h1>
+
 
 <h3>Pending (@pending.Count)</h3>
 

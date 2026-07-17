@@ -1,15 +1,15 @@
 ﻿@model BlogApp.Models.User
 @{
     ViewData["Title"] = "Delete User";
+    Layout = "_AdminLayout";
 }
-
-<h1>Delete User</h1>
 
 <p>Are you sure you want to delete "@Model.Username" (@Model.FullName)?</p>
 
 <form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Delete</button>
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </div>
 </form>
-
-<a asp-action="Index">Cancel</a>

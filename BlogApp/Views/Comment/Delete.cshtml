@@ -1,17 +1,16 @@
 ﻿@model BlogApp.Models.Comment
-
 @{
     ViewData["Title"] = "Delete Comment";
+    Layout = "_AdminLayout";
 }
-
-<h1>Delete Comment</h1>
 
 <p>Delete comment by "@Model.Author" on post "@Model.Post?.Title"?</p>
 <blockquote>@Model.Content</blockquote>
 
 <form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Delete</button>
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </div>
 </form>
-
-<a asp-action="Index">Cancel</a>

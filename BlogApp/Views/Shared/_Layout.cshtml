@@ -32,25 +32,12 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @User.Identity.Name
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" asp-controller="Post" asp-action="Index">Posts</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Categories</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Comment" asp-action="Index">Comments</a></li>
-                                    <li><a class="dropdown-item" asp-controller="User" asp-action="Index">Users</a></li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li>
-                                        <form asp-controller="Account" asp-action="Logout" method="post">
-                                            <button type="submit" class="dropdown-item">Log Out</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="navbar-text">@User.Identity.Name</span>
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
+                            </form>
+                        </div>
                     }
                     else
                     {

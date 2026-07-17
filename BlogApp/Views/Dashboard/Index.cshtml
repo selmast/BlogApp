@@ -1,9 +1,10 @@
 ﻿@model BlogApp.ViewModels.DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
+    Layout = "_AdminLayout"; 
 }
 
-<h1>Dashboard</h1>
+
 
 <div class="mb-4 d-flex flex-wrap gap-2">
     <a asp-controller="Post" asp-action="Create" class="btn btn-primary">+ New Post</a>
