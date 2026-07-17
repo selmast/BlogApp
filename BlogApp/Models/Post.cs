@@ -27,6 +27,7 @@ namespace BlogApp.Models
         public bool IsActive { get; set; } = true;
 
         [ForeignKey("Category")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         [ValidateNever]
