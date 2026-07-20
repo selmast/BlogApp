@@ -204,7 +204,7 @@ a {
 .admin-topbar-title {
     font-family: 'Playfair Display', sans-serif;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 26px;
     color: var(--accent-dark);
 }
 
@@ -566,3 +566,64 @@ h1, h2, h3, h4, h5,
         background-color: #FAC775;
         color: #633806;
     }
+
+
+.admin-table-wrapper {
+    background-color: white;
+    border: 1px solid var(--accent-light);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .admin-table-wrapper th:last-child {
+        text-align: right;
+    }
+
+.form-group label,
+.form-check label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+.btn-link {
+    color: var(--accent-dark) !important;
+}
+
+    .btn-link:hover {
+        color: var(--accent) !important;
+    }
+
+.admin-table-wrapper table thead th {
+    background-color: var(--accent-light);
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    padding: 14px 16px;
+    border-bottom: none;
+}
+
+.admin-table-wrapper table tbody td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--accent-light);
+    font-size: 14px;
+}
+
+.admin-table-wrapper table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table-wrapper table tbody tr:hover {
+    background-color: var(--accent-light);
+}
+
+.admin-table-wrapper table td:last-child {
+    text-align: right;
+}

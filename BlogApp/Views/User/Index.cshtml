@@ -4,18 +4,16 @@
     Layout = "_AdminLayout";
 }
 
-
-
 @if (TempData["DeleteError"] != null)
 {
     <div class="alert alert-danger">@TempData["DeleteError"]</div>
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-primary btn-sm">+ Create New User</a>
+</div>
 
-<div class="card" style="overflow: hidden;">
+<div class="admin-table-wrapper">
     <table class="table table-stack mb-0">
         <thead>
             <tr>

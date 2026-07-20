@@ -6,13 +6,13 @@
     var approved = Model.Where(c => c.IsApproved).ToList();
 }
 
-
-
-<h3>Pending (@pending.Count)</h3>
+<div class="section-heading-row">
+    <h3 class="mb-0">Pending (@pending.Count)</h3>
+</div>
 
 @if (pending.Any())
 {
-    <div class="card mb-3" style="overflow: hidden;">
+    <div class="admin-table-wrapper mb-3">
         <table class="table table-stack mb-0">
             <thead>
                 <tr>
@@ -51,11 +51,13 @@ else
     <p class="text-muted">No comments awaiting approval.</p>
 }
 
-<h3 class="mt-4">Approved (@approved.Count)</h3>
+<div class="section-heading-row mt-4">
+    <h3 class="mb-0">Approved (@approved.Count)</h3>
+</div>
 
 @if (approved.Any())
 {
-    <div class="card mb-3" style="overflow: hidden;">
+    <div class="admin-table-wrapper mb-3">
         <table class="table table-stack mb-0">
             <thead>
                 <tr>
