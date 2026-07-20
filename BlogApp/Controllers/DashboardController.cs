@@ -25,6 +25,11 @@ public class DashboardController : Controller
                 .Include(p => p.Category)
                 .OrderByDescending(p => p.PublishDate)
                 .Take(5)
+                .ToListAsync(),
+            TopPosts = await _db.Posts
+                .Include(p => p.Category)
+                .OrderByDescending(p => p.ViewCount)
+                .Take(5)
                 .ToListAsync()
         };
 

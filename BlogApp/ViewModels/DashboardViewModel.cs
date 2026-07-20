@@ -8,5 +8,6 @@ namespace BlogApp.ViewModels
         public int TotalCategories { get; set; }
         public int TotalComments { get; set; }
         public List<Post> RecentPosts { get; set; }
+        public List<Post> TopPosts { get; set; }
     }
 }

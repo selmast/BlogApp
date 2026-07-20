@@ -1,82 +1,114 @@
 ﻿@model BlogApp.ViewModels.DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
-    Layout = "_AdminLayout"; 
+    Layout = "_AdminLayout";
 }
 
-
+<div class="row mb-3 g-3">
+    <div class="col-md-6">
+        <div class="dashboard-banner">
+            <h2>Hello, @User.Identity.Name!</h2>
+            <p>Here's what's happening with your blog today.</p>
+            <a asp-controller="Post" asp-action="Create" class="btn">+ New Post</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <a asp-controller="Post" asp-action="Index" class="text-decoration-none">
+            <div class="stat-mini-card">
+                <div class="stat-mini-icon"><i class="bi bi-file-text"></i></div>
+                <div>
+                    <div class="stat-label">Total Posts</div>
+                    <div class="stat-value">@Model.TotalPosts</div>
+                </div>
+            </div>
+        </a>
+        <a asp-controller="Category" asp-action="Index" class="text-decoration-none">
+            <div class="stat-mini-card">
+                <div class="stat-mini-icon"><i class="bi bi-tags"></i></div>
+                <div>
+                    <div class="stat-label">Total Categories</div>
+                    <div class="stat-value">@Model.TotalCategories</div>
+                </div>
+            </div>
+        </a>
+        <a asp-controller="Comment" asp-action="Index" class="text-decoration-none">
+            <div class="stat-mini-card">
+                <div class="stat-mini-icon"><i class="bi bi-chat-dots"></i></div>
+                <div>
+                    <div class="stat-label">Total Comments</div>
+                    <div class="stat-value">@Model.TotalComments</div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
 <div class="mb-4 d-flex flex-wrap gap-2">
-    <a asp-controller="Post" asp-action="Create" class="btn btn-primary">+ New Post</a>
-    <a asp-controller="Category" asp-action="Create" class="btn btn-secondary">+ New Category</a>
-    <a asp-controller="User" asp-action="Create" class="btn btn-secondary">+ New User</a>
-    <a asp-controller="Comment" asp-action="Index" class="btn btn-outline-secondary">Moderate Comments</a>
+    <a asp-controller="Category" asp-action="Create" class="btn btn-outline-secondary btn-sm">+ New Category</a>
+    <a asp-controller="User" asp-action="Create" class="btn btn-outline-secondary btn-sm">+ New User</a>
+    <a asp-controller="Comment" asp-action="Index" class="btn btn-outline-secondary btn-sm">Moderate Comments</a>
 </div>
 
-<div class="row mb-4 g-3">
-    <div class="col-md-4">
-        <a asp-controller="Post" asp-action="Index" class="text-decoration-none text-dark">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Posts</h5>
-                    <p class="display-4">@Model.TotalPosts</p>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
-        <a asp-controller="Category" asp-action="Index" class="text-decoration-none text-dark">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Categories</h5>
-                    <p class="display-4">@Model.TotalCategories</p>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
-        <a asp-controller="Comment" asp-action="Index" class="text-decoration-none text-dark">
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Total Comments</h5>
-                    <p class="display-4">@Model.TotalComments</p>
-                </div>
-            </div>
-        </a>
-    </div>
-</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="section-heading-row">
+            <h3 class="mb-0">Recently Added Posts</h3>
+        </div>
 
-<h3>Recently Added Posts</h3>
-
-@if (Model.RecentPosts != null && Model.RecentPosts.Any())
-{
-    <div class="card mb-3" style="overflow: hidden;">
-        <table class="table table-stack mb-0">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Publish Date</th>
-                    <th>Active</th>
-                </tr>
-            </thead>
-            <tbody>
+        @if (Model.RecentPosts != null && Model.RecentPosts.Any())
+        {
+            <div class="post-list mb-3">
                 @foreach (var post in Model.RecentPosts)
                 {
-                    <tr>
-                        <td data-label="Title"><a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">@post.Title</a></td>
-                        <td data-label="Category">@post.Category?.Name</td>
-                        <td data-label="Publish Date">@post.PublishDate.ToShortDateString()</td>
-                        <td data-label="Active">@(post.IsActive ? "Yes" : "No")</td>
-                    </tr>
+                    <div class="post-row" style="padding: 16px 0;">
+                        <div class="post-row-content">
+                            <h5><a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">@post.Title</a></h5>
+                            <p class="text-muted mb-0">
+                                <small>@post.Category?.Name | @post.PublishDate.ToShortDateString() | @(post.IsActive ? "Active" : "Inactive")</small>
+                            </p>
+                        </div>
+                    </div>
                 }
-            </tbody>
-        </table>
+            </div>
+
+            <a asp-controller="Post" asp-action="Index" class="btn btn-outline-secondary btn-sm">View All Posts</a>
+        }
+        else
+        {
+            <p>No posts yet.</p>
+        }
     </div>
 
-    <a asp-controller="Post" asp-action="Index" class="btn btn-outline-secondary btn-sm">View All Posts</a>
-}
-else
-{
-    <p>No posts yet.</p>
-}
+    <div class="col-md-6">
+        <div class="section-heading-row">
+            <h3 class="mb-0">Top Performing Posts</h3>
+        </div>
+
+        @if (Model.TopPosts != null && Model.TopPosts.Any())
+        {
+            <div>
+                @foreach (var post in Model.TopPosts)
+                {
+                    <div class="most-read-row">
+                        @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                        {
+                            <a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">
+                                <img src="@post.CoverImageUrl" alt="@post.Title" />
+                            </a>
+                        }
+                        <div class="flex-grow-1">
+                            <a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id" class="d-block">@post.Title</a>
+                            <small class="text-muted">@post.Category?.Name | @post.ViewCount views</small>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <a asp-controller="Post" asp-action="Popular" class="btn btn-outline-secondary btn-sm mt-2">View All Popular Posts</a>
+        }
+        else
+        {
+            <p>No posts yet.</p>
+        }
+    </div>
+</div>
