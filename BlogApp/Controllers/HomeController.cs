@@ -17,6 +17,25 @@ namespace BlogApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var lastCommentPerPost = await _db.Comments
+                .Where(c => c.IsApproved)
+                .GroupBy(c => c.PostId)
+                .Select(g => new { PostId = g.Key, LastCommentDate = g.Max(c => c.CommentDate) })
+                .OrderByDescending(x => x.LastCommentDate)
+                .Take(5)
+                .ToListAsync();
+
+            var discussedPostIds = lastCommentPerPost.Select(x => x.PostId).ToList();
+
+            var unorderedDiscussedPosts = await _db.Posts
+                .Include(p => p.Category)
+                .Where(p => discussedPostIds.Contains(p.Id))
+                .ToListAsync();
+
+            var recentlyDiscussedPosts = discussedPostIds
+                .Select(id => unorderedDiscussedPosts.First(p => p.Id == id))
+                .ToList();
+
             var model = new HomeViewModel
             {
                 RecentPosts = await _db.Posts
@@ -33,7 +52,9 @@ namespace BlogApp.Controllers
                     .Take(3)
                     .ToListAsync(),
 
-                Categories = await _db.Categories.ToListAsync()
+                Categories = await _db.Categories.ToListAsync(),
+
+                RecentlyDiscussedPosts = recentlyDiscussedPosts
             };
 
             return View(model);

@@ -36,28 +36,59 @@ else
     <p>No posts yet.</p>
 }
 
-<div class="section-heading-row">
-    <h2 class="mb-0">Most Read</h2>
-    <a asp-controller="Post" asp-action="Popular">See All Popular Posts &rarr;</a>
-</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="section-heading-row">
+            <h2 class="mb-0">Most Read</h2>
+            <a asp-controller="Post" asp-action="Popular">See All &rarr;</a>
+        </div>
 
-@if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
-{
-    <div>
-        @foreach (var post in Model.MostReadPosts)
+        @if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
         {
-            <div class="most-read-row">
-                @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+            <div>
+                @foreach (var post in Model.MostReadPosts)
                 {
-                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
-                        <img src="@post.CoverImageUrl" alt="@post.Title" />
-                    </a>
+                    <div class="most-read-row">
+                        @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                        {
+                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                                <img src="@post.CoverImageUrl" alt="@post.Title" />
+                            </a>
+                        }
+                        <div class="flex-grow-1">
+                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.Title</a>
+                            <small class="text-muted">@post.Category?.Name</small>
+                        </div>
+                    </div>
                 }
-                <div class="flex-grow-1">
-                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.Title</a>
-                    <small class="text-muted">@post.Category?.Name</small>
-                </div>
             </div>
         }
     </div>
-}
+
+    <div class="col-md-6">
+        <div class="section-heading-row">
+            <h2 class="mb-0">Recently Discussed</h2>
+        </div>
+
+        @if (Model.RecentlyDiscussedPosts != null && Model.RecentlyDiscussedPosts.Any())
+        {
+            <div>
+                @foreach (var post in Model.RecentlyDiscussedPosts)
+                {
+                    <div class="most-read-row">
+                        @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                        {
+                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                                <img src="@post.CoverImageUrl" alt="@post.Title" />
+                            </a>
+                        }
+                        <div class="flex-grow-1">
+                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.Title</a>
+                            <small class="text-muted">@post.Category?.Name</small>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

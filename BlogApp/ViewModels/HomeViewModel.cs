@@ -8,5 +8,6 @@ namespace BlogApp.ViewModels
         public List<Post> MostReadPosts { get; set; }
         public List<Category> Categories { get; set; }
         public string SearchTerm { get; set; }
+        public List<Post> RecentlyDiscussedPosts { get; set; }
     }
 }
