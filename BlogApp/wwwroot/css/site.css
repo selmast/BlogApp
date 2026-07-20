@@ -18,6 +18,12 @@ body {
     background-color: var(--accent);
     border-color: var(--accent);
 }
+    .btn-primary:active,
+    .btn-primary:focus {
+        background-color: var(--accent-dark) !important;
+        border-color: var(--accent-dark) !important;
+        box-shadow: none !important;
+    }
 
     .btn-primary:hover {
         background-color: var(--accent-dark);
