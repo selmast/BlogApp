@@ -94,7 +94,7 @@ namespace BlogApp.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> All(int page = 1)
         {
-            int pageSize = 2;
+            int pageSize = 5;
 
             var query = _db.Posts
                 .Include(p => p.Category)
@@ -117,7 +117,7 @@ namespace BlogApp.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Popular(int page = 1)
         {
-            int pageSize = 2;
+            int pageSize = 5;
 
             var query = _db.Posts
                 .Include(p => p.Category)
