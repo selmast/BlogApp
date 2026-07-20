@@ -3,75 +3,81 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="d-flex justify-content-center">
-    <div class="card" style="max-width: 800px; width: 100%;">
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+
         @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
         {
-            <img src="@Model.CoverImageUrl" alt="@Model.Title" class="card-img-top" style="max-height:400px; object-fit:cover;" />
+            <img src="@Model.CoverImageUrl" alt="@Model.Title" class="w-100 mb-3" style="max-height:420px; object-fit:cover; border-radius:12px;" />
         }
-        <div class="card-body p-4">
-            <article>
-                <h1>@Model.Title</h1>
 
-                @if (TempData["CommentSuccess"] != null)
-                {
-                    <div class="alert alert-success">@TempData["CommentSuccess"]</div>
-                }
-                @if (TempData["CommentError"] != null)
-                {
-                    <div class="alert alert-danger">@TempData["CommentError"]</div>
-                }
+        <p class="text-muted mb-1" style="text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">
+            @Model.Category?.Name
+        </p>
 
-                <p class="text-muted"><em>Category: @Model.Category?.Name | Published: @Model.PublishDate.ToShortDateString()</em></p>
+        <h1>@Model.Title</h1>
 
-                <p>@Model.Content</p>
-            </article>
+        <p class="text-muted mb-4">
+            <small>Published @Model.PublishDate.ToShortDateString()</small>
+        </p>
 
-            <hr />
+        @if (TempData["CommentSuccess"] != null)
+        {
+            <div class="alert alert-success">@TempData["CommentSuccess"]</div>
+        }
+        @if (TempData["CommentError"] != null)
+        {
+            <div class="alert alert-danger">@TempData["CommentError"]</div>
+        }
 
-            <h3>Comments</h3>
+        <p style="font-size: 17px; line-height: 1.7;">@Model.Content</p>
 
-            @{
-                var approvedComments = Model.Comments?.Where(c => c.IsApproved).ToList();
-            }
-
-            @if (approvedComments != null && approvedComments.Any())
-            {
-                foreach (var comment in approvedComments)
-                {
-                    <div class="comment mb-2">
-                        <strong>@comment.Author</strong> <small class="text-muted">@comment.CommentDate.ToShortDateString()</small>
-                        <p>@comment.Content</p>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>No comments yet. Be the first to comment!</p>
-            }
-
-            <h4>Leave a Comment</h4>
-
-            <form asp-controller="Comment" asp-action="Create" method="post">
-                <input type="hidden" name="PostId" value="@Model.Id" />
-
-                <div class="form-group mb-3">
-                    <label>Name</label>
-                    <input name="Author" class="form-control" required />
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Email</label>
-                    <input name="Email" type="email" class="form-control" required />
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Comment</label>
-                    <textarea name="Content" class="form-control" rows="3" required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit Comment</button>
-            </form>
+        <div class="section-heading-row mt-5">
+            <h2 class="mb-0">Comments</h2>
         </div>
+
+        @{
+            var approvedComments = Model.Comments?.Where(c => c.IsApproved).ToList();
+        }
+
+        @if (approvedComments != null && approvedComments.Any())
+        {
+            foreach (var comment in approvedComments)
+            {
+                <div class="most-read-row" style="align-items: flex-start;">
+                    <div class="flex-grow-1">
+                        <strong>@comment.Author</strong> <small class="text-muted">@comment.CommentDate.ToShortDateString()</small>
+                        <p class="mb-0">@comment.Content</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">No comments yet. Be the first to comment!</p>
+        }
+
+        <h4 class="mt-4">Leave a Comment</h4>
+
+        <form asp-controller="Comment" asp-action="Create" method="post">
+            <input type="hidden" name="PostId" value="@Model.Id" />
+
+            <div class="form-group mb-3">
+                <label>Name</label>
+                <input name="Author" class="form-control" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Email</label>
+                <input name="Email" type="email" class="form-control" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Comment</label>
+                <textarea name="Content" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Comment</button>
+        </form>
     </div>
 </div>

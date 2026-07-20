@@ -3,76 +3,61 @@
     ViewData["Title"] = "Home";
 }
 
-<form asp-controller="Post" asp-action="Search" method="get" class="mb-4">
-    <div class="input-group">
-        <input type="text" name="term" class="form-control" placeholder="Search posts..." required />
-        <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-</form>
-
-<div class="row">
-    <div class="col-md-8">
-        <h2>Recent Posts</h2>
-
-        @if (Model.RecentPosts != null && Model.RecentPosts.Any())
-        {
-            foreach (var post in Model.RecentPosts)
-            {
-                <div class="card mb-3">
-                    @if (!string.IsNullOrEmpty(post.CoverImageUrl))
-                    {
-                        <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
-                            <img src="@post.CoverImageUrl" class="card-img-top" alt="@post.Title" style="max-height:250px; object-fit:cover;" />
-                        </a>
-                    }
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
-                        </h5>
-                        <p class="card-text text-muted">
-                            <small>@post.Category?.Name | @post.PublishDate.ToShortDateString()</small>
-                        </p>
-                        <p class="card-text">@post.Summary</p>
-                    </div>
-                </div>
-            }
-
-            <p><a asp-controller="Post" asp-action="All">See All Posts →</a></p>
-        }
-        else
-        {
-            <p>No posts yet.</p>
-        }
-    </div>
-
-    <div class="col-md-4">
-        <h2>Categories</h2>
-
-        @if (Model.Categories != null && Model.Categories.Any())
-        {
-            <ul class="list-group mb-4">
-                @foreach (var category in Model.Categories)
-                {
-                    <li class="list-group-item">
-                        <a asp-controller="Post" asp-action="Category" asp-route-id="@category.Id">@category.Name</a>
-                    </li>
-                }
-            </ul>
-        }
-
-        <h2>Most Read</h2>
-
-        @if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
-        {
-            <ul class="list-group">
-                @foreach (var post in Model.MostReadPosts)
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
-                        <span class="badge bg-secondary">@post.ViewCount views</span>
-                    </li>
-                }
-            </ul>
-        }
-    </div>
+<div class="section-heading-row">
+    <h2 class="mb-0">Recent Posts</h2>
+    <a asp-controller="Post" asp-action="All">See All Posts &rarr;</a>
 </div>
+
+@if (Model.RecentPosts != null && Model.RecentPosts.Any())
+{
+    <div class="recent-grid mb-5">
+        @foreach (var post in Model.RecentPosts)
+        {
+            <div class="recent-grid-item">
+                @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                {
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                        <img src="@post.CoverImageUrl" alt="@post.Title" />
+                    </a>
+                }
+                <h5>
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+                </h5>
+                <p class="text-muted">
+                    <small>@post.Category?.Name | @post.PublishDate.ToShortDateString()</small>
+                </p>
+                <p>@post.Summary</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No posts yet.</p>
+}
+
+<div class="section-heading-row">
+    <h2 class="mb-0">Most Read</h2>
+    <a asp-controller="Post" asp-action="Popular">See All Popular Posts &rarr;</a>
+</div>
+
+@if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
+{
+    <div>
+        @foreach (var post in Model.MostReadPosts)
+        {
+            <div class="most-read-row">
+                @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                {
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                        <img src="@post.CoverImageUrl" alt="@post.Title" />
+                    </a>
+                }
+                <div class="flex-grow-1">
+                    <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.Title</a>
+                    <small class="text-muted">@post.Category?.Name</small>
+                </div>
+            </div>
+        }
+    </div>
+}

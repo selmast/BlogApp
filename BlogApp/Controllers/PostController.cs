@@ -92,13 +92,47 @@ namespace BlogApp.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
-            var posts = await _db.Posts
+            int pageSize = 2;
+
+            var query = _db.Posts
                 .Include(p => p.Category)
                 .Where(p => p.IsActive)
-                .OrderByDescending(p => p.PublishDate)
+                .OrderByDescending(p => p.PublishDate);
+
+            int totalCount = await query.CountAsync();
+
+            var posts = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            return View(posts);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Popular(int page = 1)
+        {
+            int pageSize = 2;
+
+            var query = _db.Posts
+                .Include(p => p.Category)
+                .Where(p => p.IsActive)
+                .OrderByDescending(p => p.ViewCount);
+
+            int totalCount = await query.CountAsync();
+
+            var posts = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             return View(posts);
         }
