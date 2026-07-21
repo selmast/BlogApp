@@ -10,17 +10,82 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" id="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
                 <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <textarea asp-for="Description" id="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
+            <div class="form-group mb-3">
+                <button type="button" id="translateBtn" class="btn btn-outline-secondary">
+                    Translate to English
+                </button>
+                <span id="translateStatus" class="text-muted ms-2"></span>
+            </div>
+
+            <hr />
+
+            <div class="form-group mb-3">
+                <label asp-for="NameEn"></label>
+                <input asp-for="NameEn" id="NameEn" class="form-control" />
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="DescriptionEn"></label>
+                <textarea asp-for="DescriptionEn" id="DescriptionEn" class="form-control" rows="3"></textarea>
+            </div>
+
+            <hr />
+
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
 
         <a asp-action="Index" class="d-block mt-3">Back to List</a>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.getElementById('translateBtn').addEventListener('click', async function () {
+            const btn = document.getElementById('translateBtn');
+            const status = document.getElementById('translateStatus');
+
+            const name = document.getElementById('Name').value;
+            const description = document.getElementById('Description').value;
+
+            if (!name) {
+                status.textContent = 'Please fill in Name first.';
+                return;
+            }
+
+            btn.disabled = true;
+            status.textContent = 'Translating...';
+
+            try {
+                const response = await fetch('/Category/TranslateFields', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, description })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Translation request failed');
+                }
+
+                const result = await response.json();
+
+                document.getElementById('NameEn').value = result.nameEn;
+                document.getElementById('DescriptionEn').value = result.descriptionEn;
+
+                status.textContent = 'Done — review below before saving.';
+            } catch (err) {
+                status.textContent = 'Translation failed. Please try again.';
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+}

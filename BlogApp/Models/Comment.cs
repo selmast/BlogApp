@@ -15,9 +15,12 @@ namespace BlogApp.Models
         [EmailAddress]
         public string Email { get; set; }
 
-
         [Required]
+        [Display(Name = "Content (Turkish)")]
         public string Content { get; set; }
+
+        [Display(Name = "Content (English)")]
+        public string? ContentEn { get; set; }
 
         public DateTime CommentDate { get; set; } = DateTime.Now;
 

@@ -1,4 +1,5 @@
 using BlogApp.Models;
+using BlogApp.Services;   
 using BlogApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -9,14 +10,18 @@ namespace BlogApp.Controllers
     public class HomeController : Controller
     {
         private readonly BlogDbContext _db;
+        private readonly ITranslationService _translationService;   
 
-        public HomeController(BlogDbContext db)
+        public HomeController(BlogDbContext db, ITranslationService translationService)   
         {
             _db = db;
+            _translationService = translationService;   
         }
 
         public async Task<IActionResult> Index()
         {
+            
+
             var lastCommentPerPost = await _db.Comments
                 .Where(c => c.IsApproved)
                 .GroupBy(c => c.PostId)

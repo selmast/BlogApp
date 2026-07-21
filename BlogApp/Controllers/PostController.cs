@@ -1,4 +1,5 @@
 ﻿using BlogApp.Models;
+using BlogApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,11 +12,13 @@ namespace BlogApp.Controllers
     {
         private readonly BlogDbContext _db;
         private readonly IWebHostEnvironment _env;
+        private readonly ITranslationService _translationService;
 
-        public PostController(BlogDbContext db, IWebHostEnvironment env)
+        public PostController(BlogDbContext db, IWebHostEnvironment env, ITranslationService translationService)
         {
             _db = db;
             _env = env;
+            _translationService = translationService;
         }
 
         private void PopulateCategoryDropdown()
@@ -26,7 +29,7 @@ namespace BlogApp.Controllers
         private string SaveImage(IFormFile image)
         {
             var folder = Path.Combine(_env.WebRootPath, "images", "posts");
-            Directory.CreateDirectory(folder); // creates it if it doesn't exist yet
+            Directory.CreateDirectory(folder);
 
             var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
             var filePath = Path.Combine(folder, fileName);
@@ -37,6 +40,19 @@ namespace BlogApp.Controllers
             }
 
             return "/images/posts/" + fileName;
+        }
+
+        // POST: /Post/TranslateFields  -- called via AJAX from Create/Edit forms
+        [HttpPost]
+        public async Task<IActionResult> TranslateFields([FromBody] TranslateFieldsRequest request)
+        {
+            var titleEn = await _translationService.TranslateAsync(request.Title, "EN");
+            var summaryEn = string.IsNullOrWhiteSpace(request.Summary)
+                ? ""
+                : await _translationService.TranslateAsync(request.Summary, "EN");
+            var contentEn = await _translationService.TranslateAsync(request.Content, "EN");
+
+            return Json(new { titleEn, summaryEn, contentEn });
         }
 
         public async Task<IActionResult> Index()
@@ -57,7 +73,6 @@ namespace BlogApp.Controllers
 
             post.ViewCount++;
             await _db.SaveChangesAsync();
-
 
             return View(post);
         }
@@ -137,7 +152,6 @@ namespace BlogApp.Controllers
             return View(posts);
         }
 
-
         public IActionResult Create()
         {
             PopulateCategoryDropdown();
@@ -187,6 +201,9 @@ namespace BlogApp.Controllers
             existingPost.Title = post.Title;
             existingPost.Summary = post.Summary;
             existingPost.Content = post.Content;
+            existingPost.TitleEn = post.TitleEn;
+            existingPost.SummaryEn = post.SummaryEn;
+            existingPost.ContentEn = post.ContentEn;
             existingPost.CategoryId = post.CategoryId;
             existingPost.IsActive = post.IsActive;
 
@@ -194,7 +211,6 @@ namespace BlogApp.Controllers
             {
                 existingPost.CoverImageUrl = SaveImage(CoverImage);
             }
-            // else: existingPost.CoverImageUrl stays exactly as it was
 
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -216,5 +232,12 @@ namespace BlogApp.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+    }
+
+    public class TranslateFieldsRequest
+    {
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public string Content { get; set; }
     }
 }

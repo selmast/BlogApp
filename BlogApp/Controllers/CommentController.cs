@@ -1,4 +1,5 @@
 ﻿using BlogApp.Models;
+using BlogApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +10,12 @@ namespace BlogApp.Controllers
     public class CommentController : Controller
     {
         private readonly BlogDbContext _db;
+        private readonly ITranslationService _translationService;
 
-        public CommentController(BlogDbContext db)
+        public CommentController(BlogDbContext db, ITranslationService translationService)
         {
             _db = db;
+            _translationService = translationService;
         }
 
         // GET: /Comment  -- admin view of all comments
@@ -54,6 +57,7 @@ namespace BlogApp.Controllers
             if (comment == null) return NotFound();
 
             comment.IsApproved = true;
+            comment.ContentEn = await _translationService.TranslateAsync(comment.Content, "EN");
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

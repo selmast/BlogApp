@@ -10,12 +10,25 @@ namespace BlogApp.Models
 
         [Required]
         [MaxLength(200)]
+        [Display(Name = "Title (Turkish)")]
         public string Title { get; set; }
 
         [Required]
+        [Display(Name = "Content (Turkish)")]
         public string Content { get; set; }
 
+        [Display(Name = "Summary (Turkish)")]
         public string Summary { get; set; }
+
+        [MaxLength(200)]
+        [Display(Name = "Title (English)")]
+        public string? TitleEn { get; set; }
+
+        [Display(Name = "Content (English)")]
+        public string? ContentEn { get; set; }
+
+        [Display(Name = "Summary (English)")]
+        public string? SummaryEn { get; set; }
 
         [ValidateNever]
         public string CoverImageUrl { get; set; }

@@ -1,5 +1,5 @@
-
 using BlogApp.Models;
+using BlogApp.Services;   
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +24,8 @@ builder.Services.AddAuthorization();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<ITranslationService, DeepLTranslationService>();  
 
 var app = builder.Build();
 
