@@ -1,12 +1,10 @@
 using BlogApp.Models;
-using BlogApp.Services;   
+using BlogApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-
-
-
-
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +23,24 @@ builder.Services.AddAuthorization();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHttpClient<ITranslationService, DeepLTranslationService>();  
+builder.Services.AddHttpClient<ITranslationService, DeepLTranslationService>();
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[] { new CultureInfo("tr"), new CultureInfo("en") };
+
+    options.DefaultRequestCulture = new RequestCulture("tr");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+
+    // Only the culture cookie decides language — browser Accept-Language is
+    // ignored, so every fresh visitor (admin or public) consistently defaults
+    // to Turkish until they explicitly click TR/EN.
+    options.RequestCultureProviders = new List<IRequestCultureProvider>
+    {
+        new CookieRequestCultureProvider()
+    };
+});
 
 var app = builder.Build();
 
@@ -56,6 +71,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRequestLocalization();
+
 app.UseRouting();
 app.UseAuthentication();
 

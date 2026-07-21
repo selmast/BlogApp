@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentUrl = Context.Request.Path + Context.Request.QueryString;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,6 +40,20 @@
                         <button type="button" class="btn search-icon-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="bi bi-search"></i>
                         </button>
+
+                        <div class="d-flex align-items-center gap-1">
+                            <a asp-controller="Language" asp-action="SetLanguage"
+                               asp-route-culture="tr" asp-route-returnUrl="@currentUrl"
+                               class="@(System.Globalization.CultureInfo.CurrentCulture.Name == "tr" ? "fw-bold text-decoration-none" : "text-decoration-none text-muted")">
+                                TR
+                            </a>
+                            <span class="text-muted">/</span>
+                            <a asp-controller="Language" asp-action="SetLanguage"
+                               asp-route-culture="en" asp-route-returnUrl="@currentUrl"
+                               class="@(System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "fw-bold text-decoration-none" : "text-decoration-none text-muted")">
+                                EN
+                            </a>
+                        </div>
 
                         @if (User.Identity.IsAuthenticated)
                         {

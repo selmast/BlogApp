@@ -14,6 +14,7 @@
 <body>
     @{
         var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        var currentUrl = Context.Request.Path + Context.Request.QueryString;
     }
     <div class="d-flex" style="min-height: 100vh;">
         <nav class="admin-sidebar">
@@ -46,6 +47,19 @@
             <div class="admin-topbar">
                 <span class="admin-topbar-title">@ViewData["Title"]</span>
                 <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-1">
+                        <a asp-controller="Language" asp-action="SetLanguage"
+                           asp-route-culture="tr" asp-route-returnUrl="@currentUrl"
+                           class="@(System.Globalization.CultureInfo.CurrentCulture.Name == "tr" ? "fw-bold text-decoration-none" : "text-decoration-none text-muted")">
+                            TR
+                        </a>
+                        <span class="text-muted">/</span>
+                        <a asp-controller="Language" asp-action="SetLanguage"
+                           asp-route-culture="en" asp-route-returnUrl="@currentUrl"
+                           class="@(System.Globalization.CultureInfo.CurrentCulture.Name == "en" ? "fw-bold text-decoration-none" : "text-decoration-none text-muted")">
+                            EN
+                        </a>
+                    </div>
                     <span class="admin-topbar-name">@User.Identity.Name</span>
                     <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                         <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
