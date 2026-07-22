@@ -1,9 +1,10 @@
-﻿@model List<BlogApp.Models.Post>
+﻿@using BlogApp.Extensions
+@model List<BlogApp.Models.Post>
 @{
     ViewData["Title"] = "Most Read";
 }
 
-<h2>Most Read</h2>
+<h2>@Localizer["MostRead"]</h2>
 
 @if (Model != null && Model.Any())
 {
@@ -14,17 +15,17 @@
                 @if (!string.IsNullOrEmpty(post.CoverImageUrl))
                 {
                     <a asp-action="Details" asp-route-id="@post.Id">
-                        <img src="@post.CoverImageUrl" alt="@post.Title" />
+                        <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
                     </a>
                 }
                 <div class="post-row-content">
                     <h5>
-                        <a asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+                        <a asp-action="Details" asp-route-id="@post.Id">@post.LocalizedTitle()</a>
                     </h5>
                     <p class="text-muted">
-                        <small>@post.Category?.Name | @post.ViewCount views</small>
+                        <small>@post.Category?.LocalizedName() | @post.ViewCount views</small>
                     </p>
-                    <p>@post.Summary</p>
+                    <p>@post.LocalizedSummary()</p>
                 </div>
             </div>
         }
@@ -45,7 +46,7 @@
 }
 else
 {
-    <p>No posts yet.</p>
+    <p>@Localizer["NoPostsYet"]</p>
 }
 
-<a asp-controller="Home" asp-action="Index">Back to Home</a>
+<a asp-controller="Home" asp-action="Index">@Localizer["BackToHome"]</a>

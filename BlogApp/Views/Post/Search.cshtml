@@ -1,13 +1,13 @@
-﻿@model List<BlogApp.Models.Post>
+﻿@using BlogApp.Extensions
+@model List<BlogApp.Models.Post>
 @{
     ViewData["Title"] = "Search Results";
 }
 
 <div class="row">
     <div class="col-lg-8 mx-auto">
-       
 
-        <h2>Search Results for "@ViewBag.SearchTerm"</h2>
+        <h2>@Localizer["SearchResultsFor"] "@ViewBag.SearchTerm"</h2>
 
         @if (Model != null && Model.Any())
         {
@@ -18,17 +18,17 @@
                         @if (!string.IsNullOrEmpty(post.CoverImageUrl))
                         {
                             <a asp-action="Details" asp-route-id="@post.Id">
-                                <img src="@post.CoverImageUrl" alt="@post.Title" />
+                                <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
                             </a>
                         }
                         <div class="post-row-content">
                             <h5>
-                                <a asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+                                <a asp-action="Details" asp-route-id="@post.Id">@post.LocalizedTitle()</a>
                             </h5>
                             <p class="text-muted">
-                                <small>@post.Category?.Name | @post.PublishDate.ToShortDateString()</small>
+                                <small>@post.Category?.LocalizedName() | @post.PublishDate.ToShortDateString()</small>
                             </p>
-                            <p>@post.Summary</p>
+                            <p>@post.LocalizedSummary()</p>
                         </div>
                     </div>
                 }
@@ -36,9 +36,9 @@
         }
         else
         {
-            <p>No posts found matching "@ViewBag.SearchTerm".</p>
+            <p>@Localizer["NoPostsFoundMatching"] "@ViewBag.SearchTerm".</p>
         }
 
-        <a asp-controller="Home" asp-action="Index">Back to Home</a>
+        <a asp-controller="Home" asp-action="Index">@Localizer["BackToHome"]</a>
     </div>
 </div>

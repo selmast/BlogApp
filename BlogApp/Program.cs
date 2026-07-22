@@ -23,6 +23,8 @@ builder.Services.AddAuthorization();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 builder.Services.AddHttpClient<ITranslationService, DeepLTranslationService>();
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>

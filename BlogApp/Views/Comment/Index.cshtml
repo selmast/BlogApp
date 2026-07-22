@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BlogApp.Models.Comment>
 @{
-    ViewData["Title"] = "Comments";
+    ViewData["Title"] = Localizer["Comments"].Value;
     Layout = "_AdminLayout";
     var pending = Model.Where(c => !c.IsApproved).ToList();
     var approved = Model.Where(c => c.IsApproved).ToList();
 }
 
 <div class="section-heading-row">
-    <h3 class="mb-0">Pending (@pending.Count)</h3>
+    <h3 class="mb-0">@Localizer["Pending"] (@pending.Count)</h3>
 </div>
 
 @if (pending.Any())
@@ -16,28 +16,28 @@
         <table class="table table-stack mb-0">
             <thead>
                 <tr>
-                    <th style="width:10%">Author</th>
-                    <th style="width:30%">Content</th>
-                    <th style="width:25%">Post</th>
-                    <th style="width:15%">Date</th>
-                    <th style="width:20%">Actions</th>
+                    <th style="width:10%">@Localizer["Author"]</th>
+                    <th style="width:30%">@Localizer["Comment"]</th>
+                    <th style="width:25%">@Localizer["Post"]</th>
+                    <th style="width:15%">@Localizer["Date"]</th>
+                    <th style="width:20%">@Localizer["Actions"]</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in pending)
                 {
                     <tr class="table-warning">
-                        <td data-label="Author">@item.Author</td>
-                        <td data-label="Content">@item.Content</td>
-                        <td data-label="Post">@item.Post?.Title</td>
-                        <td data-label="Date">@item.CommentDate.ToShortDateString()</td>
-                        <td data-label="Actions">
+                        <td data-label="@Localizer["Author"]">@item.Author</td>
+                        <td data-label="@Localizer["Comment"]">@item.Content</td>
+                        <td data-label="@Localizer["Post"]">@item.Post?.Title</td>
+                        <td data-label="@Localizer["Date"]">@item.CommentDate.ToShortDateString()</td>
+                        <td data-label="@Localizer["Actions"]">
                             <div class="d-flex align-items-center justify-content-end gap-1">
                                 <form asp-action="Approve" asp-route-id="@item.Id" method="post" class="d-inline">
-                                    <button type="submit" class="btn btn-link p-0 align-baseline">Approve</button>
+                                    <button type="submit" class="btn btn-link p-0 align-baseline">@Localizer["Approve"]</button>
                                 </form>
                                 <span>|</span>
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                             </div>
                         </td>
                     </tr>
@@ -48,11 +48,11 @@
 }
 else
 {
-    <p class="text-muted">No comments awaiting approval.</p>
+    <p class="text-muted">@Localizer["NoCommentsAwaitingApproval"]</p>
 }
 
 <div class="section-heading-row mt-4">
-    <h3 class="mb-0">Approved (@approved.Count)</h3>
+    <h3 class="mb-0">@Localizer["Approved"] (@approved.Count)</h3>
 </div>
 
 @if (approved.Any())
@@ -61,26 +61,26 @@ else
         <table class="table table-stack mb-0">
             <thead>
                 <tr>
-                    <th style="width:10%">Author</th>
-                    <th style="width:25%">Content</th>
-                    <th style="width:25%">Content (English)</th>
-                    <th style="width:20%">Post</th>
-                    <th style="width:10%">Date</th>
-                    <th style="width:10%">Actions</th>
+                    <th style="width:10%">@Localizer["Author"]</th>
+                    <th style="width:25%">@Localizer["Comment"]</th>
+                    <th style="width:25%">@Localizer["ContentEnglish"]</th>
+                    <th style="width:20%">@Localizer["Post"]</th>
+                    <th style="width:10%">@Localizer["Date"]</th>
+                    <th style="width:10%">@Localizer["Actions"]</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in approved)
                 {
                     <tr>
-                        <td data-label="Author">@item.Author</td>
-                        <td data-label="Content">@item.Content</td>
-                        <td data-label="Content (English)">@(item.ContentEn ?? "—")</td>
-                        <td data-label="Post">@item.Post?.Title</td>
-                        <td data-label="Date">@item.CommentDate.ToShortDateString()</td>
-                        <td data-label="Actions">
+                        <td data-label="@Localizer["Author"]">@item.Author</td>
+                        <td data-label="@Localizer["Comment"]">@item.Content</td>
+                        <td data-label="@Localizer["ContentEnglish"]">@(item.ContentEn ?? "—")</td>
+                        <td data-label="@Localizer["Post"]">@item.Post?.Title</td>
+                        <td data-label="@Localizer["Date"]">@item.CommentDate.ToShortDateString()</td>
+                        <td data-label="@Localizer["Actions"]">
                             <div class="d-flex align-items-center justify-content-end">
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                             </div>
                         </td>
                     </tr>
@@ -91,5 +91,5 @@ else
 }
 else
 {
-    <p class="text-muted">No approved comments yet.</p>
+    <p class="text-muted">@Localizer["NoApprovedCommentsYet"]</p>
 }

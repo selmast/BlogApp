@@ -1,15 +1,15 @@
 ﻿@model BlogApp.ViewModels.DashboardViewModel
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = Localizer["Dashboard"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="row mb-3 g-3">
     <div class="col-md-6">
         <div class="dashboard-banner">
-            <h2>Hello, @User.Identity.Name!</h2>
-            <p>Here's what's happening with your blog today.</p>
-            <a asp-controller="Post" asp-action="Create" class="btn">+ New Post</a>
+            <h2>@Localizer["HelloUser", User.Identity.Name]</h2>
+            <p>@Localizer["DashboardIntro"]</p>
+            <a asp-controller="Post" asp-action="Create" class="btn">+ @Localizer["NewPost"]</a>
         </div>
     </div>
     <div class="col-md-6">
@@ -17,7 +17,7 @@
             <div class="stat-mini-card">
                 <div class="stat-mini-icon"><i class="bi bi-file-text"></i></div>
                 <div>
-                    <div class="stat-label">Total Posts</div>
+                    <div class="stat-label">@Localizer["TotalPosts"]</div>
                     <div class="stat-value">@Model.TotalPosts</div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="stat-mini-card">
                 <div class="stat-mini-icon"><i class="bi bi-tags"></i></div>
                 <div>
-                    <div class="stat-label">Total Categories</div>
+                    <div class="stat-label">@Localizer["TotalCategories"]</div>
                     <div class="stat-value">@Model.TotalCategories</div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="stat-mini-card">
                 <div class="stat-mini-icon"><i class="bi bi-chat-dots"></i></div>
                 <div>
-                    <div class="stat-label">Total Comments</div>
+                    <div class="stat-label">@Localizer["TotalComments"]</div>
                     <div class="stat-value">@Model.TotalComments</div>
                 </div>
             </div>
@@ -44,15 +44,15 @@
 </div>
 
 <div class="mb-4 d-flex flex-wrap gap-2">
-    <a asp-controller="Category" asp-action="Create" class="btn btn-outline-secondary btn-sm">+ New Category</a>
-    <a asp-controller="User" asp-action="Create" class="btn btn-outline-secondary btn-sm">+ New User</a>
-    <a asp-controller="Comment" asp-action="Index" class="btn btn-outline-secondary btn-sm">Moderate Comments</a>
+    <a asp-controller="Category" asp-action="Create" class="btn btn-outline-secondary btn-sm">+ @Localizer["NewCategory"]</a>
+    <a asp-controller="User" asp-action="Create" class="btn btn-outline-secondary btn-sm">+ @Localizer["NewUser"]</a>
+    <a asp-controller="Comment" asp-action="Index" class="btn btn-outline-secondary btn-sm">@Localizer["ModerateComments"]</a>
 </div>
 
 <div class="row">
     <div class="col-md-6">
         <div class="section-heading-row">
-            <h3 class="mb-0">Recently Added Posts</h3>
+            <h3 class="mb-0">@Localizer["RecentlyAddedPosts"]</h3>
         </div>
 
         @if (Model.RecentPosts != null && Model.RecentPosts.Any())
@@ -69,23 +69,23 @@
                         }
                         <div class="flex-grow-1">
                             <a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id" class="d-block">@post.Title</a>
-                            <small class="text-muted">@post.Category?.Name | @post.PublishDate.ToShortDateString() | @(post.IsActive ? "Active" : "Inactive")</small>
+                            <small class="text-muted">@post.Category?.Name | @post.PublishDate.ToShortDateString() | @(post.IsActive ? Localizer["Active"] : Localizer["Inactive"])</small>
                         </div>
                     </div>
                 }
             </div>
 
-            <a asp-controller="Post" asp-action="Index" class="btn btn-outline-secondary btn-sm mt-2">View All Posts</a>
+            <a asp-controller="Post" asp-action="Index" class="btn btn-outline-secondary btn-sm mt-2">@Localizer["ViewAllPosts"]</a>
         }
         else
         {
-            <p>No posts yet.</p>
+            <p>@Localizer["NoPostsYet"]</p>
         }
     </div>
 
     <div class="col-md-6">
         <div class="section-heading-row">
-            <h3 class="mb-0">Top Performing Posts</h3>
+            <h3 class="mb-0">@Localizer["TopPerformingPosts"]</h3>
         </div>
 
         @if (Model.TopPosts != null && Model.TopPosts.Any())
@@ -108,11 +108,11 @@
                 }
             </div>
 
-            <a asp-controller="Post" asp-action="Popular" class="btn btn-outline-secondary btn-sm mt-2">View All Popular Posts</a>
+            <a asp-controller="Post" asp-action="Popular" class="btn btn-outline-secondary btn-sm mt-2">@Localizer["ViewAllPopularPosts"]</a>
         }
         else
         {
-            <p>No posts yet.</p>
+            <p>@Localizer["NoPostsYet"]</p>
         }
     </div>
 </div>

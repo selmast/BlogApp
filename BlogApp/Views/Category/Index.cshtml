@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BlogApp.Models.Category>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = Localizer["Categories"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="mb-3">
     <div class="mb-3">
-        <a asp-action="Create" class="btn btn-primary btn-sm">+ Create New Category</a>
+        <a asp-action="Create" class="btn btn-primary btn-sm">+ @Localizer["CreateNewCategory"]</a>
     </div>
 </div>
 
@@ -15,18 +15,18 @@
     <table class="table table-stack mb-0">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>@Localizer["Name"]</th>
+                <th>@Localizer["Actions"]</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td data-label="Name">@item.Name</td>
-                    <td data-label="Actions">
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <td data-label="@Localizer["Name"]">@item.Name</td>
+                    <td data-label="@Localizer["Actions"]">
+                        <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                     </td>
                 </tr>
             }

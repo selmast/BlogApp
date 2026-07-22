@@ -1,6 +1,7 @@
-﻿@model BlogApp.Models.Post
+﻿@using BlogApp.Extensions
+@model BlogApp.Models.Post
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.LocalizedTitle();
 }
 
 <div class="row">
@@ -8,17 +9,17 @@
 
         @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
         {
-            <img src="@Model.CoverImageUrl" alt="@Model.Title" class="w-100 mb-3" style="max-height:420px; object-fit:cover; border-radius:12px;" />
+            <img src="@Model.CoverImageUrl" alt="@Model.LocalizedTitle()" class="w-100 mb-3" style="max-height:420px; object-fit:cover; border-radius:12px;" />
         }
 
         <p class="text-muted mb-1" style="text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">
-            @Model.Category?.Name
+            @Model.Category?.LocalizedName()
         </p>
 
-        <h1>@Model.Title</h1>
+        <h1>@Model.LocalizedTitle()</h1>
 
         <p class="text-muted mb-4">
-            <small>Published @Model.PublishDate.ToShortDateString()</small>
+            <small>@Localizer["Published"] @Model.PublishDate.ToShortDateString()</small>
         </p>
 
         @if (TempData["CommentSuccess"] != null)
@@ -30,10 +31,10 @@
             <div class="alert alert-danger">@TempData["CommentError"]</div>
         }
 
-        <p style="font-size: 17px; line-height: 1.7;">@Model.Content</p>
+        <p style="font-size: 17px; line-height: 1.7;">@Model.LocalizedContent()</p>
 
         <div class="section-heading-row mt-5">
-            <h2 class="mb-0">Comments</h2>
+            <h2 class="mb-0">@Localizer["Comments"]</h2>
         </div>
 
         @{
@@ -47,37 +48,37 @@
                 <div class="most-read-row" style="align-items: flex-start;">
                     <div class="flex-grow-1">
                         <strong>@comment.Author</strong> <small class="text-muted">@comment.CommentDate.ToShortDateString()</small>
-                        <p class="mb-0">@comment.Content</p>
+                        <p class="mb-0">@comment.LocalizedContent()</p>
                     </div>
                 </div>
             }
         }
         else
         {
-            <p class="text-muted">No comments yet. Be the first to comment!</p>
+            <p class="text-muted">@Localizer["NoCommentsYet"]</p>
         }
 
-        <h4 class="mt-4">Leave a Comment</h4>
+        <h4 class="mt-4">@Localizer["LeaveAComment"]</h4>
 
         <form asp-controller="Comment" asp-action="Create" method="post">
             <input type="hidden" name="PostId" value="@Model.Id" />
 
             <div class="form-group mb-3">
-                <label>Name</label>
+                <label>@Localizer["Name"]</label>
                 <input name="Author" class="form-control" required />
             </div>
 
             <div class="form-group mb-3">
-                <label>Email</label>
+                <label>@Localizer["Email"]</label>
                 <input name="Email" type="email" class="form-control" required />
             </div>
 
             <div class="form-group mb-3">
-                <label>Comment</label>
+                <label>@Localizer["Comment"]</label>
                 <textarea name="Content" class="form-control" rows="3" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit Comment</button>
+            <button type="submit" class="btn btn-primary">@Localizer["SubmitComment"]</button>
         </form>
     </div>
 </div>

@@ -9,19 +9,19 @@
         <form asp-action="Edit">
             <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
-                <label asp-for="Name"></label>
+                <label>@Localizer["NameTr"]</label>
                 <input asp-for="Name" id="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="Description"></label>
+                <label>@Localizer["DescriptionTr"]</label>
                 <textarea asp-for="Description" id="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
                 <button type="button" id="translateBtn" class="btn btn-outline-secondary">
-                    Translate to English
+                    @Localizer["TranslateToEnglish"]
                 </button>
                 <span id="translateStatus" class="text-muted ms-2"></span>
             </div>
@@ -29,20 +29,20 @@
             <hr />
 
             <div class="form-group mb-3">
-                <label asp-for="NameEn"></label>
+                <label>@Localizer["NameEnLabel"]</label>
                 <input asp-for="NameEn" id="NameEn" class="form-control" />
             </div>
             <div class="form-group mb-3">
-                <label asp-for="DescriptionEn"></label>
+                <label>@Localizer["DescriptionEnLabel"]</label>
                 <textarea asp-for="DescriptionEn" id="DescriptionEn" class="form-control" rows="3"></textarea>
             </div>
 
             <hr />
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">@Localizer["Save"]</button>
         </form>
 
-        <a asp-action="Index" class="d-block mt-3">Back to List</a>
+        <a asp-action="Index" class="d-block mt-3">@Localizer["BackToList"]</a>
     </div>
 </div>
 

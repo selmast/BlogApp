@@ -10,44 +10,116 @@
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group mb-3">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
+                <label>@Localizer["TitleTr"]</label>
+                <input asp-for="Title" id="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="Summary"></label>
-                <input asp-for="Summary" class="form-control" />
+                <label>@Localizer["SummaryTr"]</label>
+                <input asp-for="Summary" id="Summary" class="form-control" />
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="Content"></label>
-                <textarea asp-for="Content" class="form-control" rows="8"></textarea>
+                <label>@Localizer["ContentTr"]</label>
+                <textarea asp-for="Content" id="Content" class="form-control" rows="8"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
+
+            <div class="form-group mb-3">
+                <button type="button" id="translateBtn" class="btn btn-outline-secondary">
+                    @Localizer["TranslateToEnglish"]
+                </button>
+                <span id="translateStatus" class="text-muted ms-2"></span>
+            </div>
+
+            <hr />
+
+            <div class="form-group mb-3">
+                <label>@Localizer["TitleEnLabel"]</label>
+                <input asp-for="TitleEn" id="TitleEn" class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>@Localizer["SummaryEnLabel"]</label>
+                <input asp-for="SummaryEn" id="SummaryEn" class="form-control" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>@Localizer["ContentEnLabel"]</label>
+                <textarea asp-for="ContentEn" id="ContentEn" class="form-control" rows="8"></textarea>
+            </div>
+
+            <hr />
 
             @if (!string.IsNullOrEmpty(Model.CoverImageUrl))
             {
                 <img src="@Model.CoverImageUrl" style="max-width:200px;" class="mb-2 d-block rounded" />
             }
             <div class="form-group mb-3">
-                <label>Cover Image (leave empty to keep current)</label>
+                <label>@Localizer["CoverImageKeepCurrent"]</label>
                 <input type="file" name="CoverImage" class="form-control" accept="image/*" />
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="CategoryId"></label>
+                <label>@Localizer["Category"]</label>
                 <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-control"></select>
             </div>
 
             <div class="form-check mb-3">
                 <input asp-for="IsActive" class="form-check-input" />
-                <label asp-for="IsActive" class="form-check-label"></label>
+                <label class="form-check-label">@Localizer["Active"]</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">@Localizer["Save"]</button>
         </form>
 
-        <a asp-action="Index" class="d-block mt-3">Back to List</a>
+        <a asp-action="Index" class="d-block mt-3">@Localizer["BackToList"]</a>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.getElementById('translateBtn').addEventListener('click', async function () {
+            const btn = document.getElementById('translateBtn');
+            const status = document.getElementById('translateStatus');
+
+            const title = document.getElementById('Title').value;
+            const summary = document.getElementById('Summary').value;
+            const content = document.getElementById('Content').value;
+
+            if (!title || !content) {
+                status.textContent = 'Please fill in Title and Content first.';
+                return;
+            }
+
+            btn.disabled = true;
+            status.textContent = 'Translating...';
+
+            try {
+                const response = await fetch('/Post/TranslateFields', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, summary, content })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Translation request failed');
+                }
+
+                const result = await response.json();
+
+                document.getElementById('TitleEn').value = result.titleEn;
+                document.getElementById('SummaryEn').value = result.summaryEn;
+                document.getElementById('ContentEn').value = result.contentEn;
+
+                status.textContent = 'Done — review below before saving.';
+            } catch (err) {
+                status.textContent = 'Translation failed. Please try again.';
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+}

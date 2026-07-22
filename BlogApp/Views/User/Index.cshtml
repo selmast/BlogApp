@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<BlogApp.Models.User>
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = Localizer["Users"].Value;
     Layout = "_AdminLayout";
 }
 
@@ -10,27 +10,27 @@
 }
 
 <div class="mb-3">
-    <a asp-action="Create" class="btn btn-primary btn-sm">+ Create New User</a>
+    <a asp-action="Create" class="btn btn-primary btn-sm">+ @Localizer["CreateNewUser"]</a>
 </div>
 
 <div class="admin-table-wrapper">
     <table class="table table-stack mb-0">
         <thead>
             <tr>
-                <th>Username</th>
-                <th>Full Name</th>
-                <th>Actions</th>
+                <th>@Localizer["Username"]</th>
+                <th>@Localizer["FullName"]</th>
+                <th>@Localizer["Actions"]</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td data-label="Username">@item.Username</td>
-                    <td data-label="Full Name">@item.FullName</td>
-                    <td data-label="Actions">
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <td data-label="@Localizer["Username"]">@item.Username</td>
+                    <td data-label="@Localizer["FullName"]">@item.FullName</td>
+                    <td data-label="@Localizer["Actions"]">
+                        <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                     </td>
                 </tr>
             }

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Dashboard" xml:space="preserve"><value>Panel</value></data>
+	<data name="Posts" xml:space="preserve"><value>Yazılar</value></data>
+	<data name="Categories" xml:space="preserve"><value>Kategoriler</value></data>
+	<data name="Comments" xml:space="preserve"><value>Yorumlar</value></data>
+	<data name="Users" xml:space="preserve"><value>Kullanıcılar</value></data>
+	<data name="BackToHome" xml:space="preserve"><value>Ana Sayfaya Dön</value></data>
+	<data name="LogOut" xml:space="preserve"><value>Çıkış Yap</value></data>
+	<data name="RecentPosts" xml:space="preserve"><value>Son Yazılar</value></data>
+	<data name="SeeAllPosts" xml:space="preserve"><value>Tüm Yazıları Gör →</value></data>
+	<data name="MostRead" xml:space="preserve"><value>En Çok Okunanlar</value></data>
+	<data name="SeeAll" xml:space="preserve"><value>Tümünü Gör →</value></data>
+	<data name="RecentlyDiscussed" xml:space="preserve"><value>Son Tartışılanlar</value></data>
+	<data name="NoPostsYet" xml:space="preserve"><value>Henüz yazı yok.</value></data>
+	<data name="Published" xml:space="preserve"><value>Yayınlanma Tarihi</value></data>
+	<data name="NoCommentsYet" xml:space="preserve"><value>Henüz yorum yok. İlk yorumu siz yazın!</value></data>
+	<data name="LeaveAComment" xml:space="preserve"><value>Yorum Yap</value></data>
+	<data name="Name" xml:space="preserve"><value>Adınız</value></data>
+	<data name="Email" xml:space="preserve"><value>E-posta</value></data>
+	<data name="Comment" xml:space="preserve"><value>Yorum</value></data>
+	<data name="SubmitComment" xml:space="preserve"><value>Yorumu Gönder</value></data>
+	<data name="AllPosts" xml:space="preserve"><value>Tüm Yazılar</value></data>
+	<data name="SearchResultsFor" xml:space="preserve"><value>Şunun için arama sonuçları</value></data>
+	<data name="NoPostsFoundMatching" xml:space="preserve"><value>Şununla eşleşen yazı bulunamadı</value></data>
+	<data name="Category" xml:space="preserve"><value>Kategori</value></data>
+	<data name="NoPostsInCategoryYet" xml:space="preserve"><value>Bu kategoride henüz yazı yok.</value></data>
+	<data name="AdminLogin" xml:space="preserve"><value>Yönetici Girişi</value></data>
+	<data name="Username" xml:space="preserve"><value>Kullanıcı Adı</value></data>
+	<data name="Password" xml:space="preserve"><value>Şifre</value></data>
+	<data name="LogIn" xml:space="preserve"><value>Giriş Yap</value></data>
+	<data name="HelloUser" xml:space="preserve"><value>Merhaba, {0}!</value></data>
+	<data name="DashboardIntro" xml:space="preserve"><value>Bugün blogunuzda neler oluyor işte burada.</value></data>
+	<data name="NewPost" xml:space="preserve"><value>Yeni Yazı</value></data>
+	<data name="TotalPosts" xml:space="preserve"><value>Toplam Yazı</value></data>
+	<data name="TotalCategories" xml:space="preserve"><value>Toplam Kategori</value></data>
+	<data name="TotalComments" xml:space="preserve"><value>Toplam Yorum</value></data>
+	<data name="NewCategory" xml:space="preserve"><value>Yeni Kategori</value></data>
+	<data name="NewUser" xml:space="preserve"><value>Yeni Kullanıcı</value></data>
+	<data name="ModerateComments" xml:space="preserve"><value>Yorumları Denetle</value></data>
+	<data name="RecentlyAddedPosts" xml:space="preserve"><value>Son Eklenen Yazılar</value></data>
+	<data name="Active" xml:space="preserve"><value>Aktif</value></data>
+	<data name="Inactive" xml:space="preserve"><value>Pasif</value></data>
+	<data name="ViewAllPosts" xml:space="preserve"><value>Tüm Yazıları Gör</value></data>
+	<data name="TopPerformingPosts" xml:space="preserve"><value>En Başarılı Yazılar</value></data>
+	<data name="ViewAllPopularPosts" xml:space="preserve"><value>Tüm En Çok Okunanları Gör</value></data>
+	<data name="Title" xml:space="preserve"><value>Başlık</value></data>
+	<data name="PublishDate" xml:space="preserve"><value>Yayın Tarihi</value></data>
+	<data name="Actions" xml:space="preserve"><value>İşlemler</value></data>
+	<data name="View" xml:space="preserve"><value>Görüntüle</value></data>
+	<data name="Edit" xml:space="preserve"><value>Düzenle</value></data>
+	<data name="Delete" xml:space="preserve"><value>Sil</value></data>
+	<data name="Yes" xml:space="preserve"><value>Evet</value></data>
+	<data name="No" xml:space="preserve"><value>Hayır</value></data>
+	<data name="CreateNewPost" xml:space="preserve"><value>Yeni Yazı Oluştur</value></data>
+	<data name="CreateNewCategory" xml:space="preserve"><value>Yeni Kategori Oluştur</value></data>
+	<data name="Pending" xml:space="preserve"><value>Bekleyen</value></data>
+	<data name="Approved" xml:space="preserve"><value>Onaylanan</value></data>
+	<data name="Author" xml:space="preserve"><value>Yazar</value></data>
+	<data name="ContentEnglish" xml:space="preserve"><value>İçerik (İngilizce)</value></data>
+	<data name="Post" xml:space="preserve"><value>Yazı</value></data>
+	<data name="Date" xml:space="preserve"><value>Tarih</value></data>
+	<data name="Approve" xml:space="preserve"><value>Onayla</value></data>
+	<data name="NoCommentsAwaitingApproval" xml:space="preserve"><value>Onay bekleyen yorum yok.</value></data>
+	<data name="NoApprovedCommentsYet" xml:space="preserve"><value>Henüz onaylanmış yorum yok.</value></data>
+	<data name="CreateNewUser" xml:space="preserve"><value>Yeni Kullanıcı Oluştur</value></data>
+	<data name="FullName" xml:space="preserve"><value>Ad Soyad</value></data>
+	<data name="TitleTr" xml:space="preserve"><value>Başlık (Türkçe)</value></data>
+	<data name="TitleEnLabel" xml:space="preserve"><value>Başlık (İngilizce)</value></data>
+	<data name="SummaryTr" xml:space="preserve"><value>Özet (Türkçe)</value></data>
+	<data name="SummaryEnLabel" xml:space="preserve"><value>Özet (İngilizce)</value></data>
+	<data name="ContentTr" xml:space="preserve"><value>İçerik (Türkçe)</value></data>
+	<data name="ContentEnLabel" xml:space="preserve"><value>İçerik (İngilizce)</value></data>
+	<data name="NameTr" xml:space="preserve"><value>İsim (Türkçe)</value></data>
+	<data name="NameEnLabel" xml:space="preserve"><value>İsim (İngilizce)</value></data>
+	<data name="DescriptionTr" xml:space="preserve"><value>Açıklama (Türkçe)</value></data>
+	<data name="DescriptionEnLabel" xml:space="preserve"><value>Açıklama (İngilizce)</value></data>
+	<data name="TranslateToEnglish" xml:space="preserve"><value>İngilizceye Çevir</value></data>
+	<data name="Create" xml:space="preserve"><value>Oluştur</value></data>
+	<data name="Save" xml:space="preserve"><value>Kaydet</value></data>
+	<data name="BackToList" xml:space="preserve"><value>Listeye Dön</value></data>
+	<data name="CoverImage" xml:space="preserve"><value>Kapak Görseli</value></data>
+	<data name="CoverImageKeepCurrent" xml:space="preserve"><value>Kapak Görseli (mevcut olanı korumak için boş bırakın)</value></data>
+	<data name="SearchPlaceholder" xml:space="preserve"><value>Yazılarda ara...</value></data>
+
+</root>

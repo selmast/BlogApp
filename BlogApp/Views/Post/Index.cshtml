@@ -1,37 +1,37 @@
 ﻿@model IEnumerable<BlogApp.Models.Post>
 
 @{
-    ViewData["Title"] = "Posts";
+    ViewData["Title"] = Localizer["Posts"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="mb-3">
-    <a asp-action="Create" class="btn btn-primary btn-sm">+ Create New Post</a>
+    <a asp-action="Create" class="btn btn-primary btn-sm">+ @Localizer["CreateNewPost"]</a>
 </div>
 
 <div class="admin-table-wrapper">
     <table class="table table-stack mb-0">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Publish Date</th>
-                <th>Active</th>
-                <th>Actions</th>
+                <th>@Localizer["Title"]</th>
+                <th>@Localizer["Category"]</th>
+                <th>@Localizer["PublishDate"]</th>
+                <th>@Localizer["Active"]</th>
+                <th>@Localizer["Actions"]</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td data-label="Title">@item.Title</td>
-                    <td data-label="Category">@item.Category?.Name</td>
-                    <td data-label="Publish Date">@item.PublishDate.ToShortDateString()</td>
-                    <td data-label="Active">@(item.IsActive ? "Yes" : "No")</td>
-                    <td data-label="Actions">
-                        <a asp-action="Details" asp-route-id="@item.Id">View</a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <td data-label="@Localizer["Title"]">@item.Title</td>
+                    <td data-label="@Localizer["Category"]">@item.Category?.Name</td>
+                    <td data-label="@Localizer["PublishDate"]">@item.PublishDate.ToShortDateString()</td>
+                    <td data-label="@Localizer["Active"]">@(item.IsActive ? Localizer["Yes"] : Localizer["No"])</td>
+                    <td data-label="@Localizer["Actions"]">
+                        <a asp-action="Details" asp-route-id="@item.Id">@Localizer["View"]</a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                     </td>
                 </tr>
             }

@@ -1,5 +1,6 @@
 ﻿using BlogApp.Models;
 using BlogApp.Services;
+using BlogApp.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -102,7 +103,7 @@ namespace BlogApp.Controllers
                 .OrderByDescending(p => p.PublishDate)
                 .ToListAsync();
 
-            ViewBag.CategoryName = category.Name;
+            ViewBag.CategoryName = category.LocalizedName();
             return View(posts);
         }
 

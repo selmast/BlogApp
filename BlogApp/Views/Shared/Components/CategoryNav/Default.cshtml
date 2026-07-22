@@ -1,8 +1,9 @@
-﻿@model List<BlogApp.Models.Category>
+﻿@using BlogApp.Extensions
+@model List<BlogApp.Models.Category>
 
 <div class="category-strip">
     @foreach (var category in Model)
     {
-        <a asp-controller="Post" asp-action="Category" asp-route-id="@category.Id" class="category-strip-link">@category.Name</a>
+        <a asp-controller="Post" asp-action="Category" asp-route-id="@category.Id" class="category-strip-link">@category.LocalizedName()</a>
     }
 </div>

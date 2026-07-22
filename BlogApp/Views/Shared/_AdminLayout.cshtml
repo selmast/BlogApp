@@ -21,24 +21,24 @@
             <div class="admin-sidebar-brand">BlogApp</div>
 
             <a asp-controller="Home" asp-action="Index" class="admin-sidebar-link admin-sidebar-back">
-                &larr; Home
+                &larr; @Localizer["BackToHome"]
             </a>
 
             <div class="admin-sidebar-nav">
                 <a asp-controller="Dashboard" asp-action="Index" class="admin-sidebar-link @(currentController == "Dashboard" ? "active" : "")">
-                    <i class="bi bi-speedometer2"></i> Dashboard
+                    <i class="bi bi-speedometer2"></i> @Localizer["Dashboard"]
                 </a>
                 <a asp-controller="Post" asp-action="Index" class="admin-sidebar-link @(currentController == "Post" ? "active" : "")">
-                    <i class="bi bi-file-text"></i> Posts
+                    <i class="bi bi-file-text"></i> @Localizer["Posts"]
                 </a>
                 <a asp-controller="Category" asp-action="Index" class="admin-sidebar-link @(currentController == "Category" ? "active" : "")">
-                    <i class="bi bi-tags"></i> Categories
+                    <i class="bi bi-tags"></i> @Localizer["Categories"]
                 </a>
                 <a asp-controller="Comment" asp-action="Index" class="admin-sidebar-link @(currentController == "Comment" ? "active" : "")">
-                    <i class="bi bi-chat-dots"></i> Comments
+                    <i class="bi bi-chat-dots"></i> @Localizer["Comments"]
                 </a>
                 <a asp-controller="User" asp-action="Index" class="admin-sidebar-link @(currentController == "User" ? "active" : "")">
-                    <i class="bi bi-people"></i> Users
+                    <i class="bi bi-people"></i> @Localizer["Users"]
                 </a>
             </div>
         </nav>
@@ -62,7 +62,7 @@
                     </div>
                     <span class="admin-topbar-name">@User.Identity.Name</span>
                     <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
+                        <button type="submit" class="btn btn-outline-secondary btn-sm">@Localizer["LogOut"]</button>
                     </form>
                 </div>
             </div>

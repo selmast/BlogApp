@@ -59,7 +59,7 @@
                         {
                             <span class="navbar-text">@User.Identity.Name</span>
                             <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
+                                <button type="submit" class="btn btn-outline-secondary btn-sm">@Localizer["LogOut"]</button>
                             </form>
                         }
                         else
@@ -95,7 +95,7 @@
                 <div class="modal-body p-4">
                     <form asp-controller="Post" asp-action="Search" method="get">
                         <div class="input-group input-group-lg">
-                            <input type="text" name="term" class="form-control" placeholder="Search posts..." required autofocus />
+                            <input type="text" name="term" class="form-control" placeholder="@Localizer["SearchPlaceholder"]" required autofocus />
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-search"></i>
                             </button>
