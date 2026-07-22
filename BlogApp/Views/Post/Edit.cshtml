@@ -1,11 +1,11 @@
 ﻿@model BlogApp.Models.Post
 @{
-    ViewData["Title"] = "Edit Post";
+    ViewData["Title"] = Localizer["EditPostTitle"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-8 form-narrow">
         <form asp-action="Edit" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
 

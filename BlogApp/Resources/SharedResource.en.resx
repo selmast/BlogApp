@@ -103,4 +103,16 @@
 	<data name="DeleteUserTitle" xml:space="preserve"><value>Delete User</value></data>
 	<data name="ConfirmDeleteUser" xml:space="preserve"><value>Are you sure you want to delete "{0}" ({1})?</value></data>
 	<data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+	<data name="CreatePostTitle" xml:space="preserve"><value>Create Post</value></data>
+	<data name="EditPostTitle" xml:space="preserve"><value>Edit Post</value></data>
+	<data name="CreateCategoryTitleFull" xml:space="preserve"><value>Create Category</value></data>
+	<data name="EditCategoryTitle" xml:space="preserve"><value>Edit Category</value></data>
+	<data name="CreatePostTitle" xml:space="preserve"><value>Create Post</value></data>
+	<data name="EditPostTitle" xml:space="preserve"><value>Edit Post</value></data>
+	<data name="CreateCategoryTitleFull" xml:space="preserve"><value>Create Category</value></data>
+	<data name="EditCategoryTitle" xml:space="preserve"><value>Edit Category</value></data>
+	<data name="CreateUserTitle" xml:space="preserve"><value>Create User</value></data>
+	<data name="EditUserTitle" xml:space="preserve"><value>Edit User</value></data>
+	<data name="PasswordLeaveBlank" xml:space="preserve"><value>Leave blank to keep current password</value></data>
+
 </root>

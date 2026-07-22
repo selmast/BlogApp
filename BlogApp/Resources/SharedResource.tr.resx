@@ -103,4 +103,16 @@
 	<data name="DeleteUserTitle" xml:space="preserve"><value>Kullanıcıyı Sil</value></data>
 	<data name="ConfirmDeleteUser" xml:space="preserve"><value>"{0}" ({1}) kullanıcısını silmek istediğinizden emin misiniz?</value></data>
 	<data name="Cancel" xml:space="preserve"><value>İptal</value></data>
+	<data name="CreatePostTitle" xml:space="preserve"><value>Yazı Oluştur</value></data>
+	<data name="EditPostTitle" xml:space="preserve"><value>Yazıyı Düzenle</value></data>
+	<data name="CreateCategoryTitleFull" xml:space="preserve"><value>Kategori Oluştur</value></data>
+	<data name="EditCategoryTitle" xml:space="preserve"><value>Kategoriyi Düzenle</value></data>
+	<data name="CreatePostTitle" xml:space="preserve"><value>Yazı Oluştur</value></data>
+	<data name="EditPostTitle" xml:space="preserve"><value>Yazıyı Düzenle</value></data>
+	<data name="CreateCategoryTitleFull" xml:space="preserve"><value>Kategori Oluştur</value></data>
+	<data name="EditCategoryTitle" xml:space="preserve"><value>Kategoriyi Düzenle</value></data>
+	<data name="CreateUserTitle" xml:space="preserve"><value>Kullanıcı Oluştur</value></data>
+	<data name="EditUserTitle" xml:space="preserve"><value>Kullanıcıyı Düzenle</value></data>
+	<data name="PasswordLeaveBlank" xml:space="preserve"><value>Mevcut şifreyi korumak için boş bırakın</value></data>
+
 </root>

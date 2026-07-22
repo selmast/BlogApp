@@ -1,11 +1,11 @@
 ﻿@model BlogApp.Models.Post
 @{
-    ViewData["Title"] = "Create Post";
+    ViewData["Title"] = Localizer["CreatePostTitle"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-8 form-narrow">
         @if (!ViewData.ModelState.IsValid)
         {
             <div class="alert alert-danger">

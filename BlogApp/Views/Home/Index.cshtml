@@ -43,28 +43,30 @@ else
             <h2 class="mb-0">@Localizer["MostRead"]</h2>
         </div>
 
-        @if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
-        {
-            <div>
-                @foreach (var post in Model.MostReadPosts)
-                {
-                    <div class="most-read-row">
-                        @if (!string.IsNullOrEmpty(post.CoverImageUrl))
-                        {
-                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
-                                <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
-                            </a>
-                        }
-                        <div class="flex-grow-1">
-                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.LocalizedTitle()</a>
-                            <small class="text-muted">@post.Category?.LocalizedName()</small>
+        <div class="dashboard-card">
+            @if (Model.MostReadPosts != null && Model.MostReadPosts.Any())
+            {
+                <div>
+                    @foreach (var post in Model.MostReadPosts)
+                    {
+                        <div class="most-read-row">
+                            @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                            {
+                                <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                                    <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
+                                </a>
+                            }
+                            <div class="flex-grow-1">
+                                <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.LocalizedTitle()</a>
+                                <small class="text-muted">@post.Category?.LocalizedName()</small>
+                            </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
 
-            <a asp-controller="Post" asp-action="Popular" class="btn btn-outline-secondary btn-sm mt-2">@Localizer["SeeAll"]</a>
-        }
+                <a asp-controller="Post" asp-action="Popular" class="btn btn-outline-secondary btn-sm mt-2">@Localizer["SeeAll"]</a>
+            }
+        </div>
     </div>
 
     <div class="col-md-6">
@@ -72,27 +74,29 @@ else
             <h2 class="mb-0">@Localizer["RecentlyDiscussed"]</h2>
         </div>
 
-        @if (Model.RecentlyDiscussedPosts != null && Model.RecentlyDiscussedPosts.Any())
-        {
-            <div>
-                @foreach (var post in Model.RecentlyDiscussedPosts)
-                {
-                    <div class="most-read-row">
-                        @if (!string.IsNullOrEmpty(post.CoverImageUrl))
-                        {
-                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
-                                <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
-                            </a>
-                        }
-                        <div class="flex-grow-1">
-                            <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.LocalizedTitle()</a>
-                            <small class="text-muted">@post.Category?.LocalizedName()</small>
+        <div class="dashboard-card">
+            @if (Model.RecentlyDiscussedPosts != null && Model.RecentlyDiscussedPosts.Any())
+            {
+                <div>
+                    @foreach (var post in Model.RecentlyDiscussedPosts)
+                    {
+                        <div class="most-read-row">
+                            @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                            {
+                                <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id">
+                                    <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
+                                </a>
+                            }
+                            <div class="flex-grow-1">
+                                <a asp-controller="Post" asp-action="Details" asp-route-id="@post.Id" class="d-block">@post.LocalizedTitle()</a>
+                                <small class="text-muted">@post.Category?.LocalizedName()</small>
+                            </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
 
-            <a asp-controller="Post" asp-action="Discussed" class="btn btn-outline-secondary btn-sm mt-2">@Localizer["SeeAll"]</a>
-        }
+                <a asp-controller="Post" asp-action="Discussed" class="btn btn-outline-secondary btn-sm mt-2">@Localizer["SeeAll"]</a>
+            }
+        </div>
     </div>
 </div>

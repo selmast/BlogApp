@@ -1,11 +1,11 @@
 ﻿@model BlogApp.Models.Category
 @{
-    ViewData["Title"] = "Edit Category";
+    ViewData["Title"] = Localizer["EditCategoryTitle"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 form-narrow">
         <form asp-action="Edit">
             <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">

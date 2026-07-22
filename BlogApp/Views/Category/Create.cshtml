@@ -1,11 +1,11 @@
 ﻿@model BlogApp.Models.Category
 @{
-    ViewData["Title"] = "Create Category";
+    ViewData["Title"] = Localizer["CreateCategoryTitleFull"].Value;
     Layout = "_AdminLayout";
 }
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 form-narrow">
         <form asp-action="Create">
             <div class="form-group mb-3">
                 <label>@Localizer["NameTr"]</label>
