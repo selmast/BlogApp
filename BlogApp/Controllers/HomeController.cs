@@ -1,5 +1,5 @@
 using BlogApp.Models;
-using BlogApp.Services;   
+using BlogApp.Services;
 using BlogApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -10,24 +10,24 @@ namespace BlogApp.Controllers
     public class HomeController : Controller
     {
         private readonly BlogDbContext _db;
-        private readonly ITranslationService _translationService;   
+        private readonly ITranslationService _translationService;
 
-        public HomeController(BlogDbContext db, ITranslationService translationService)   
+        public HomeController(BlogDbContext db, ITranslationService translationService)
         {
             _db = db;
-            _translationService = translationService;   
+            _translationService = translationService;
         }
 
         public async Task<IActionResult> Index()
         {
-            
+
 
             var lastCommentPerPost = await _db.Comments
                 .Where(c => c.IsApproved)
                 .GroupBy(c => c.PostId)
                 .Select(g => new { PostId = g.Key, LastCommentDate = g.Max(c => c.CommentDate) })
                 .OrderByDescending(x => x.LastCommentDate)
-                .Take(5)
+                .Take(3)
                 .ToListAsync();
 
             var discussedPostIds = lastCommentPerPost.Select(x => x.PostId).ToList();

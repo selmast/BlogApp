@@ -153,6 +153,42 @@ namespace BlogApp.Controllers
             return View(posts);
         }
 
+        // GET: /Post/Discussed  -- full paginated "Recently Discussed" list
+        [AllowAnonymous]
+        public async Task<IActionResult> Discussed(int page = 1)
+        {
+            int pageSize = 5;
+
+            var lastCommentPerPost = await _db.Comments
+                .Where(c => c.IsApproved)
+                .GroupBy(c => c.PostId)
+                .Select(g => new { PostId = g.Key, LastCommentDate = g.Max(c => c.CommentDate) })
+                .OrderByDescending(x => x.LastCommentDate)
+                .ToListAsync();
+
+            int totalCount = lastCommentPerPost.Count;
+
+            var pagedIds = lastCommentPerPost
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(x => x.PostId)
+                .ToList();
+
+            var unorderedPosts = await _db.Posts
+                .Include(p => p.Category)
+                .Where(p => pagedIds.Contains(p.Id))
+                .ToListAsync();
+
+            var posts = pagedIds
+                .Select(id => unorderedPosts.First(p => p.Id == id))
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            return View(posts);
+        }
+
         public IActionResult Create()
         {
             PopulateCategoryDropdown();

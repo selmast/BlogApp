@@ -94,4 +94,13 @@
 	<data name="CoverImage" xml:space="preserve"><value>Cover Image</value></data>
 	<data name="CoverImageKeepCurrent" xml:space="preserve"><value>Cover Image (leave empty to keep current)</value></data>
 	<data name="SearchPlaceholder" xml:space="preserve"><value>Search posts...</value></data>
+	<data name="DeleteCategoryTitle" xml:space="preserve"><value>Delete Category</value></data>
+	<data name="ConfirmDeleteCategory" xml:space="preserve"><value>Are you sure you want to delete "{0}"?</value></data>
+	<data name="DeleteCommentTitle" xml:space="preserve"><value>Delete Comment</value></data>
+	<data name="ConfirmDeleteComment" xml:space="preserve"><value>Delete comment by "{0}" on post "{1}"?</value></data>
+	<data name="DeletePostTitle" xml:space="preserve"><value>Delete Post</value></data>
+	<data name="ConfirmDeletePost" xml:space="preserve"><value>Are you sure you want to delete "{0}" (Category: {1})?</value></data>
+	<data name="DeleteUserTitle" xml:space="preserve"><value>Delete User</value></data>
+	<data name="ConfirmDeleteUser" xml:space="preserve"><value>Are you sure you want to delete "{0}" ({1})?</value></data>
+	<data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
 </root>

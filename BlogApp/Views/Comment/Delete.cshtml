@@ -4,13 +4,13 @@
     Layout = "_AdminLayout";
 }
 
-<p>Delete comment by "@Model.Author" on post "@Model.Post?.Title"?</p>
+<p>@Localizer["ConfirmDeleteComment", Model.Author, Model.Post?.Title]</p>
 <blockquote>@Model.Content</blockquote>
 
 <form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
     <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">@Localizer["Cancel"]</a>
     </div>
 </form>

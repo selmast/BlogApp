@@ -1,17 +1,15 @@
-﻿```
-@model BlogApp.Models.Post
+﻿@model BlogApp.Models.Post
 @{
     ViewData["Title"] = "Delete Post";
     Layout = "_AdminLayout";
 }
 
-<p>Are you sure you want to delete "@Model.Title" (Category: @Model.Category?.Name)?</p>
+<p>@Localizer["ConfirmDeletePost", Model.Title, Model.Category?.Name]</p>
 
 <form asp-action="Delete">
     <input type="hidden" asp-for="Id" />
     <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">@Localizer["Cancel"]</a>
     </div>
 </form>
-```

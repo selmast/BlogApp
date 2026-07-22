@@ -94,5 +94,13 @@
 	<data name="CoverImage" xml:space="preserve"><value>Kapak Görseli</value></data>
 	<data name="CoverImageKeepCurrent" xml:space="preserve"><value>Kapak Görseli (mevcut olanı korumak için boş bırakın)</value></data>
 	<data name="SearchPlaceholder" xml:space="preserve"><value>Yazılarda ara...</value></data>
-
+	<data name="DeleteCategoryTitle" xml:space="preserve"><value>Kategoriyi Sil</value></data>
+	<data name="ConfirmDeleteCategory" xml:space="preserve"><value>"{0}" kategorisini silmek istediğinizden emin misiniz?</value></data>
+	<data name="DeleteCommentTitle" xml:space="preserve"><value>Yorumu Sil</value></data>
+	<data name="ConfirmDeleteComment" xml:space="preserve"><value>"{0}" tarafından "{1}" yazısına yapılan yorumu silmek istiyor musunuz?</value></data>
+	<data name="DeletePostTitle" xml:space="preserve"><value>Yazıyı Sil</value></data>
+	<data name="ConfirmDeletePost" xml:space="preserve"><value>"{0}" yazısını silmek istediğinizden emin misiniz? (Kategori: {1})</value></data>
+	<data name="DeleteUserTitle" xml:space="preserve"><value>Kullanıcıyı Sil</value></data>
+	<data name="ConfirmDeleteUser" xml:space="preserve"><value>"{0}" ({1}) kullanıcısını silmek istediğinizden emin misiniz?</value></data>
+	<data name="Cancel" xml:space="preserve"><value>İptal</value></data>
 </root>

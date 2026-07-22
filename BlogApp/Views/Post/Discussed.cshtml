@@ -1,0 +1,52 @@
+﻿@using BlogApp.Extensions
+@model List<BlogApp.Models.Post>
+@{
+    ViewData["Title"] = "Recently Discussed";
+}
+
+<h2>@Localizer["RecentlyDiscussed"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="post-list">
+        @foreach (var post in Model)
+        {
+            <div class="post-row">
+                @if (!string.IsNullOrEmpty(post.CoverImageUrl))
+                {
+                    <a asp-action="Details" asp-route-id="@post.Id">
+                        <img src="@post.CoverImageUrl" alt="@post.LocalizedTitle()" />
+                    </a>
+                }
+                <div class="post-row-content">
+                    <h5>
+                        <a asp-action="Details" asp-route-id="@post.Id">@post.LocalizedTitle()</a>
+                    </h5>
+                    <p class="text-muted">
+                        <small>@post.Category?.LocalizedName() | @post.PublishDate.ToShortDateString()</small>
+                    </p>
+                    <p>@post.LocalizedSummary()</p>
+                </div>
+            </div>
+        }
+        @if (ViewBag.TotalPages > 1)
+        {
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link" asp-action="@ViewContext.RouteData.Values["action"]" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    </div>
+}
+else
+{
+    <p>@Localizer["NoPostsYet"]</p>
+}
+
+<a asp-controller="Home" asp-action="Index">@Localizer["BackToHome"]</a>
