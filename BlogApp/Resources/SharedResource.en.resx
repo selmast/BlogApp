@@ -114,5 +114,7 @@
 	<data name="CreateUserTitle" xml:space="preserve"><value>Create User</value></data>
 	<data name="EditUserTitle" xml:space="preserve"><value>Edit User</value></data>
 	<data name="PasswordLeaveBlank" xml:space="preserve"><value>Leave blank to keep current password</value></data>
+	<data name="CategoryNameColumn" xml:space="preserve"><value>Name</value></data>
+	<data name="SearchResultsForTerm" xml:space="preserve"><value>Search results for '{0}'</value></data>
 
 </root>

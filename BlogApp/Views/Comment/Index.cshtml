@@ -64,10 +64,9 @@ else
             <thead>
                 <tr>
                     <th style="width:10%">@Localizer["Author"]</th>
-                    <th style="width:20%">@Localizer["Comment"]</th>
-                    <th style="width:20%">@Localizer["ContentEnglish"]</th>
-                    <th style="width:15%">@Localizer["Post"]</th>
-                    <th style="width:10%">@Localizer["Date"]</th>
+                    <th style="width:30%">@Localizer["Comment"]</th>
+                    <th style="width:20%">@Localizer["Post"]</th>
+                    <th style="width:15%">@Localizer["Date"]</th>
                     <th style="width:25%">@Localizer["Actions"]</th>
                 </tr>
             </thead>
@@ -76,8 +75,13 @@ else
                 {
                     <tr>
                         <td data-label="@Localizer["Author"]">@item.Author</td>
-                        <td data-label="@Localizer["Comment"]">@item.Content</td>
-                        <td data-label="@Localizer["ContentEnglish"]">@(item.ContentEn ?? "—")</td>
+                        <td data-label="@Localizer["Comment"]">
+                            <div>@item.Content</div>
+                            @if (!string.IsNullOrEmpty(item.ContentEn))
+                            {
+                                <div class="text-muted small mt-1">EN: @item.ContentEn</div>
+                            }
+                        </td>
                         <td data-label="@Localizer["Post"]">@item.Post?.Title</td>
                         <td data-label="@Localizer["Date"]">@item.CommentDate.ToShortDateString()</td>
                         <td data-label="@Localizer["Actions"]">

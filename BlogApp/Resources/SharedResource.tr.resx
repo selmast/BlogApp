@@ -114,5 +114,7 @@
 	<data name="CreateUserTitle" xml:space="preserve"><value>Kullanıcı Oluştur</value></data>
 	<data name="EditUserTitle" xml:space="preserve"><value>Kullanıcıyı Düzenle</value></data>
 	<data name="PasswordLeaveBlank" xml:space="preserve"><value>Mevcut şifreyi korumak için boş bırakın</value></data>
+	<data name="CategoryNameColumn" xml:space="preserve"><value>Kategori Adı</value></data>
+	<data name="SearchResultsForTerm" xml:space="preserve"><value>'{0}' için arama sonuçları</value></data>
 
 </root>

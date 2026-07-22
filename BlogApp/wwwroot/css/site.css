@@ -422,9 +422,8 @@ h1, h2, h3, h4, h5,
 .pagination {
     gap: 8px;
 }
-
 .page-item .page-link {
-    border: none;
+    border: 1px solid var(--accent-light);
     border-radius: 50%;
     width: 38px;
     height: 38px;
@@ -443,6 +442,7 @@ h1, h2, h3, h4, h5,
 
 .page-item.active .page-link {
     background-color: var(--accent);
+    border-color: var(--accent);
     color: white;
 }
 
@@ -704,4 +704,10 @@ h1, h2, h3, h4, h5,
 
 .form-narrow {
     max-width: 720px;
+    margin: 0 auto;
+}
+
+.article-text {
+    max-width: 720px;
+    margin: 0 auto;
 }

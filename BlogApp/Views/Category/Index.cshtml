@@ -15,7 +15,7 @@
     <table class="table table-stack mb-0">
         <thead>
             <tr>
-                <th>@Localizer["Name"]</th>
+                <th>@Localizer["CategoryNameColumn"]</th>
                 <th>@Localizer["Actions"]</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td data-label="@Localizer["Name"]">@item.Name</td>
+                    <td data-label="@Localizer["CategoryNameColumn"]">@item.Name</td>
                     <td data-label="@Localizer["Actions"]">
                         <a asp-action="Edit" asp-route-id="@item.Id">@Localizer["Edit"]</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">@Localizer["Delete"]</a>

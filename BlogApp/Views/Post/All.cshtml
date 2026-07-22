@@ -38,7 +38,7 @@
             <p>@Localizer["NoPostsYet"]</p>
         }
 
-        <a asp-controller="Home" asp-action="Index">@Localizer["BackToHome"]</a>
+        <a asp-controller="Home" asp-action="Index" class="d-inline-block mt-4 pt-3 border-top">@Localizer["BackToHome"]</a>
         @if (ViewBag.TotalPages > 1)
         {
             <nav class="mt-4">

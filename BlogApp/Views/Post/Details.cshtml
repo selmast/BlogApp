@@ -12,73 +12,75 @@
             <img src="@Model.CoverImageUrl" alt="@Model.LocalizedTitle()" class="w-100 mb-3" style="max-height:420px; object-fit:cover; border-radius:12px;" />
         }
 
-        <p class="text-muted mb-1" style="text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">
-            @Model.Category?.LocalizedName()
-        </p>
+        <div class="article-text">
+            <p class="text-muted mb-1" style="text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">
+                @Model.Category?.LocalizedName()
+            </p>
 
-        <h1>@Model.LocalizedTitle()</h1>
+            <h1>@Model.LocalizedTitle()</h1>
 
-        <p class="text-muted mb-4">
-            <small>@Localizer["Published"] @Model.PublishDate.ToShortDateString()</small>
-        </p>
+            <p class="text-muted mb-4">
+                <small>@Localizer["Published"] @Model.PublishDate.ToShortDateString()</small>
+            </p>
 
-        @if (TempData["CommentSuccess"] != null)
-        {
-            <div class="alert alert-success">@TempData["CommentSuccess"]</div>
-        }
-        @if (TempData["CommentError"] != null)
-        {
-            <div class="alert alert-danger">@TempData["CommentError"]</div>
-        }
-
-        <p style="font-size: 17px; line-height: 1.7;">@Model.LocalizedContent()</p>
-
-        <div class="section-heading-row mt-5">
-            <h2 class="mb-0">@Localizer["Comments"]</h2>
-        </div>
-
-        @{
-            var approvedComments = Model.Comments?.Where(c => c.IsApproved).ToList();
-        }
-
-        @if (approvedComments != null && approvedComments.Any())
-        {
-            foreach (var comment in approvedComments)
+            @if (TempData["CommentSuccess"] != null)
             {
-                <div class="most-read-row" style="align-items: flex-start;">
-                    <div class="flex-grow-1">
-                        <strong>@comment.Author</strong> <small class="text-muted">@comment.CommentDate.ToShortDateString()</small>
-                        <p class="mb-0">@comment.LocalizedContent()</p>
-                    </div>
-                </div>
+                <div class="alert alert-success">@TempData["CommentSuccess"]</div>
             }
-        }
-        else
-        {
-            <p class="text-muted">@Localizer["NoCommentsYet"]</p>
-        }
+            @if (TempData["CommentError"] != null)
+            {
+                <div class="alert alert-danger">@TempData["CommentError"]</div>
+            }
 
-        <h4 class="mt-4">@Localizer["LeaveAComment"]</h4>
+            <p style="font-size: 17px; line-height: 1.7;">@Model.LocalizedContent()</p>
 
-        <form asp-controller="Comment" asp-action="Create" method="post">
-            <input type="hidden" name="PostId" value="@Model.Id" />
-
-            <div class="form-group mb-3">
-                <label>@Localizer["Name"]</label>
-                <input name="Author" class="form-control" required />
+            <div class="section-heading-row mt-5">
+                <h2 class="mb-0">@Localizer["Comments"]</h2>
             </div>
 
-            <div class="form-group mb-3">
-                <label>@Localizer["Email"]</label>
-                <input name="Email" type="email" class="form-control" required />
-            </div>
+            @{
+                var approvedComments = Model.Comments?.Where(c => c.IsApproved).ToList();
+            }
 
-            <div class="form-group mb-3">
-                <label>@Localizer["Comment"]</label>
-                <textarea name="Content" class="form-control" rows="3" required></textarea>
-            </div>
+            @if (approvedComments != null && approvedComments.Any())
+            {
+                foreach (var comment in approvedComments)
+                {
+                    <div class="most-read-row" style="align-items: flex-start;">
+                        <div class="flex-grow-1">
+                            <strong>@comment.Author</strong> <small class="text-muted">@comment.CommentDate.ToShortDateString()</small>
+                            <p class="mb-0">@comment.LocalizedContent()</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">@Localizer["NoCommentsYet"]</p>
+            }
 
-            <button type="submit" class="btn btn-primary">@Localizer["SubmitComment"]</button>
-        </form>
+            <h4 class="mt-4">@Localizer["LeaveAComment"]</h4>
+
+            <form asp-controller="Comment" asp-action="Create" method="post">
+                <input type="hidden" name="PostId" value="@Model.Id" />
+
+                <div class="form-group mb-3">
+                    <label>@Localizer["Name"]</label>
+                    <input name="Author" class="form-control" required />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>@Localizer["Email"]</label>
+                    <input name="Email" type="email" class="form-control" required />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>@Localizer["Comment"]</label>
+                    <textarea name="Content" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">@Localizer["SubmitComment"]</button>
+            </form>
+        </div>
     </div>
 </div>
