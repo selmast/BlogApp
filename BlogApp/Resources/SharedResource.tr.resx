@@ -116,5 +116,10 @@
 	<data name="PasswordLeaveBlank" xml:space="preserve"><value>Mevcut şifreyi korumak için boş bırakın</value></data>
 	<data name="CategoryNameColumn" xml:space="preserve"><value>Kategori Adı</value></data>
 	<data name="SearchResultsForTerm" xml:space="preserve"><value>'{0}' için arama sonuçları</value></data>
+	<data name="DeletePostPageTitle" xml:space="preserve"><value>Yazıyı Sil</value></data>
+	<data name="DeleteCategoryPageTitle" xml:space="preserve"><value>Kategoriyi Sil</value></data>
+	<data name="DeleteCommentPageTitle" xml:space="preserve"><value>Yorumu Sil</value></data>
+	<data name="DeleteUserPageTitle" xml:space="preserve"><value>Kullanıcıyı Sil</value></data>
+
 
 </root>
